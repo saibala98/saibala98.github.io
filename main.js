@@ -78,33 +78,115 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   });
 });
 
-// ============ Scroll-triggered fade-up animations, staggered per parent ============
-const fadeGroups = new Map();
-document.querySelectorAll('.fade-up').forEach((el) => {
+// ============ Reveal-on-scroll: .fade-up (legacy) + [data-animate] (reusable system) ============
+// Re-triggers in both scroll directions: an element resets to hidden the
+// moment it leaves the viewport (scrolling past it either way) and replays
+// its staggered entrance animation the next time it scrolls back into view.
+// [data-stagger-step] on an element overrides the 80ms default (used for
+// dense groups like pills, so a 7-item row doesn't take forever).
+const revealEls = Array.from(document.querySelectorAll('.fade-up, [data-animate]'));
+const revealGroups = new Map();
+revealEls.forEach((el) => {
   const parent = el.parentElement;
-  if (!fadeGroups.has(parent)) fadeGroups.set(parent, []);
-  fadeGroups.get(parent).push(el);
+  if (!revealGroups.has(parent)) revealGroups.set(parent, []);
+  revealGroups.get(parent).push(el);
 });
 
 if (prefersReducedMotion) {
-  document.querySelectorAll('.fade-up').forEach((el) => el.classList.add('is-visible'));
+  revealEls.forEach((el) => el.classList.add('is-visible'));
 } else if ('IntersectionObserver' in window) {
-  const fadeObserver = new IntersectionObserver(
-    (entries, observer) => {
+  const revealTimers = new WeakMap();
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const siblings = fadeGroups.get(entry.target.parentElement) || [entry.target];
-        const index = siblings.indexOf(entry.target);
-        const delay = Math.max(index, 0) * 80;
-        setTimeout(() => entry.target.classList.add('is-visible'), delay);
-        observer.unobserve(entry.target);
+        const el = entry.target;
+        const pendingTimer = revealTimers.get(el);
+        if (entry.isIntersecting) {
+          if (el.classList.contains('is-visible')) return;
+          const siblings = revealGroups.get(el.parentElement) || [el];
+          const index = siblings.indexOf(el);
+          const step = Number(el.dataset.staggerStep) || 80;
+          const delay = Math.max(index, 0) * step;
+          revealTimers.set(
+            el,
+            setTimeout(() => el.classList.add('is-visible'), delay),
+          );
+        } else {
+          if (pendingTimer) clearTimeout(pendingTimer);
+          el.classList.remove('is-visible');
+        }
       });
     },
     { threshold: 0.1 },
   );
-  document.querySelectorAll('.fade-up').forEach((el) => fadeObserver.observe(el));
+  revealEls.forEach((el) => revealObserver.observe(el));
 } else {
-  document.querySelectorAll('.fade-up').forEach((el) => el.classList.add('is-visible'));
+  revealEls.forEach((el) => el.classList.add('is-visible'));
+}
+
+// ============ MVP progress bars: animate width from 0 each time visible ============
+const progressBars = document.querySelectorAll('.progress-bar[data-progress]');
+progressBars.forEach((bar) => {
+  bar.style.setProperty('--progress', `${bar.dataset.progress}%`);
+});
+if (prefersReducedMotion) {
+  progressBars.forEach((bar) => bar.classList.add('is-visible'));
+} else if ('IntersectionObserver' in window) {
+  const progressObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
+      });
+    },
+    { threshold: 0.4 },
+  );
+  progressBars.forEach((bar) => progressObserver.observe(bar));
+} else {
+  progressBars.forEach((bar) => bar.classList.add('is-visible'));
+}
+
+// ============ Count-up stat numbers, replaying each time the About section is re-entered ============
+const countEls = document.querySelectorAll('[data-count-to]');
+if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+  const easeOutQuad = (t) => t * (2 - t);
+  const countFrames = new WeakMap();
+
+  function animateCount(el) {
+    const target = Number(el.dataset.countTo) || 0;
+    const suffix = el.dataset.countSuffix || '';
+    const duration = 800;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const value = Math.round(target * easeOutQuad(progress));
+      el.textContent = `${value}${suffix}`;
+      if (progress < 1) {
+        countFrames.set(el, requestAnimationFrame(tick));
+      } else {
+        el.textContent = `${target}${suffix}`;
+        countFrames.delete(el);
+      }
+    }
+    countFrames.set(el, requestAnimationFrame(tick));
+  }
+
+  const countObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target;
+        if (entry.isIntersecting) {
+          animateCount(el);
+        } else {
+          const frame = countFrames.get(el);
+          if (frame) cancelAnimationFrame(frame);
+          countFrames.delete(el);
+          el.textContent = `0${el.dataset.countSuffix || ''}`;
+        }
+      });
+    },
+    { threshold: 0.4 },
+  );
+  countEls.forEach((el) => countObserver.observe(el));
 }
 
 // ============ Scale the embedded live-demo iframe to fit its preview box ============

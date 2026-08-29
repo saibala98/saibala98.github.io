@@ -57,14 +57,14 @@
       <!-- ============ HERO ============ -->
       <section class="hero" id="top">
         <div class="container">
-          <div class="fade-up">
-            <p class="eyebrow eyebrow--gold">Candidate brief</p>
-            <h1 class="hero-name">Sai Saiprasad</h1>
-            <p class="hero__role">AI Product Manager</p>
-            <p class="hero__thesis">
+          <div>
+            <p class="eyebrow eyebrow--gold" data-animate="up">Candidate brief</p>
+            <h1 class="hero-name" data-animate="up">Sai Saiprasad</h1>
+            <p class="hero__role" data-animate="up">AI Product Manager</p>
+            <p class="hero__thesis" data-animate="up">
               4 years shipping software at CIBC. Now building AI products that work. MMAI at Schulich.
             </p>
-            <div class="hero__actions">
+            <div class="hero__actions" data-animate="up">
               <a href="case-study-cue.html" class="btn btn-primary">View CUE case study &#8594;</a>
               <a href="resume.pdf" class="btn btn-ghost">Download resume</a>
             </div>
@@ -76,31 +76,31 @@
             </div>
             <hr class="brief-card__rule" />
             <dl>
-              <div class="brief-row">
+              <div class="brief-row" data-animate="left" data-stagger-step="60">
                 <dt>Name</dt>
                 <dd>Sai Saiprasad</dd>
               </div>
-              <div class="brief-row">
+              <div class="brief-row" data-animate="left" data-stagger-step="60">
                 <dt>Track</dt>
                 <dd>QA Delivery &#8594; AI Product</dd>
               </div>
-              <div class="brief-row">
+              <div class="brief-row" data-animate="left" data-stagger-step="60">
                 <dt>Program</dt>
                 <dd class="tnum">MMAI &middot; Schulich &middot; 2027</dd>
               </div>
-              <div class="brief-row">
+              <div class="brief-row" data-animate="left" data-stagger-step="60">
                 <dt>Embedded</dt>
                 <dd>TCS @ CIBC Banking</dd>
               </div>
-              <div class="brief-row brief-row--spaced">
+              <div class="brief-row brief-row--spaced" data-animate="left" data-stagger-step="60">
                 <dt>Problem</dt>
                 <dd>Enterprise AI needs PMs who can actually build</dd>
               </div>
-              <div class="brief-row">
+              <div class="brief-row" data-animate="left" data-stagger-step="60">
                 <dt>Solution</dt>
                 <dd>Domain depth + MMAI + CUE platform shipped</dd>
               </div>
-              <div class="brief-row brief-row--spaced">
+              <div class="brief-row brief-row--spaced" data-animate="left" data-stagger-step="60">
                 <dt>Status</dt>
                 <dd class="brief-status"><span class="status-dot status-dot--pulse"></span>Available &middot; KW, ON &#127464;&#127462;</dd>
               </div>
@@ -139,51 +139,61 @@
               </div>
               <hr class="brief-card__rule" />
               <dl>
-                <div class="brief-row">
+                <div class="brief-row" data-animate="left" data-stagger-step="60">
                   <dt>Product</dt>
                   <dd>CUE - AI onboarding &amp; knowledge buddy</dd>
                 </div>
-                <div class="brief-row">
+                <div class="brief-row" data-animate="left" data-stagger-step="60">
                   <dt>Type</dt>
                   <dd>B2B SaaS &middot; Enterprise AI</dd>
                 </div>
-                <div class="brief-row">
+                <div class="brief-row" data-animate="left" data-stagger-step="60">
                   <dt>Stack</dt>
                   <dd>React &middot; Node.js &middot; Claude</dd>
                 </div>
-                <div class="brief-row brief-row--spaced">
+                <div class="brief-row brief-row--spaced" data-animate="left" data-stagger-step="60">
                   <dt>Problem</dt>
                   <dd>New employees drown in scattered onboarding docs</dd>
                 </div>
-                <div class="brief-row">
+                <div class="brief-row" data-animate="left" data-stagger-step="60">
                   <dt>Solution</dt>
                   <dd>Unified AI platform with LOB-aware knowledge buddy</dd>
                 </div>
-                <div class="brief-row brief-row--spaced">
+                <div class="brief-row brief-row--spaced" data-animate="left" data-stagger-step="60">
                   <dt>MVP1</dt>
-                  <dd class="mvp-progress"><span class="fill">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</span><span class="empty">&#9617;&#9617;</span><span class="label">Complete</span></dd>
+                  <dd>
+                    <div class="progress-bar" data-progress="80">
+                      <div class="progress-bar__fill"></div>
+                    </div>
+                    <span class="mvp-progress__label">Complete</span>
+                  </dd>
                 </div>
-                <div class="brief-row">
+                <div class="brief-row" data-animate="left" data-stagger-step="60">
                   <dt>MVP2</dt>
-                  <dd class="mvp-progress"><span class="fill">&#9608;&#9608;</span><span class="empty">&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;</span><span class="label">In progress</span></dd>
+                  <dd>
+                    <div class="progress-bar" data-progress="20">
+                      <div class="progress-bar__fill"></div>
+                    </div>
+                    <span class="mvp-progress__label">In progress</span>
+                  </dd>
                 </div>
               </dl>
             </div>
 
-            <div class="capability-grid fade-up">
-              <div class="card">
+            <div class="capability-grid">
+              <div class="card" data-animate="up">
                 <h4>AI Knowledge Buddy</h4>
                 <p>RAG Q&amp;A over LOB documents.</p>
               </div>
-              <div class="card">
+              <div class="card" data-animate="up">
                 <h4>Compliance Audit</h4>
                 <p>Immutable INSERT-only records.</p>
               </div>
-              <div class="card">
+              <div class="card" data-animate="up">
                 <h4>Mentor Workflow</h4>
                 <p>6-session collaboration checklist.</p>
               </div>
-              <div class="card">
+              <div class="card" data-animate="up">
                 <h4>Leader Dashboard</h4>
                 <p>Completions, overdue, CSV export.</p>
               </div>
@@ -202,12 +212,12 @@
             <a href="https://github.com/saibala98/cue-platform" target="_blank" rel="noreferrer" class="btn btn-ghost">GitHub code</a>
           </div>
 
-          <ul class="tag-list cue-tags fade-up">
-            <li class="tag tag-tech">React</li>
-            <li class="tag tag-tech">TypeScript</li>
-            <li class="tag tag-tech">Node.js</li>
-            <li class="tag tag-tech">PostgreSQL</li>
-            <li class="tag tag-tech">Claude API</li>
+          <ul class="tag-list cue-tags">
+            <li class="tag tag-tech" data-animate="scale" data-stagger-step="40">React</li>
+            <li class="tag tag-tech" data-animate="scale" data-stagger-step="40">TypeScript</li>
+            <li class="tag tag-tech" data-animate="scale" data-stagger-step="40">Node.js</li>
+            <li class="tag tag-tech" data-animate="scale" data-stagger-step="40">PostgreSQL</li>
+            <li class="tag tag-tech" data-animate="scale" data-stagger-step="40">Claude API</li>
           </ul>
         </div>
       </section>
@@ -224,8 +234,8 @@
               <div class="work-row__main">
                 <h4>Smart Contribution Copilot</h4>
                 <p>
-                  AI-guided RRSP/TFSA/FHSA optimization for CIBC Smart Planner. Pitched to an internal panel with an
-                  interactive prototype.
+                  AI-guided RRSP/TFSA/FHSA optimization for Smart Planner. Pitched to an internal panel with an
+                  interactive prototype, still in progress.
                 </p>
               </div>
               <div class="work-row__meta">
@@ -233,38 +243,7 @@
                   <li class="tag tag-tech">React</li>
                   <li class="tag tag-tech">AI/ML</li>
                   <li class="tag tag-tech">Fintech</li>
-                  <li class="tag tag-tech">Concept pitch</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="work-row fade-up">
-              <div class="work-row__main">
-                <h4>Customer Churn Prediction</h4>
-                <p>
-                  ML classification model for churn prediction. Found no learnable signal in the feature set,
-                  ROC-AUC &asymp; 0.50. The insight was the result.
-                </p>
-              </div>
-              <div class="work-row__meta">
-                <ul class="tag-list">
-                  <li class="tag tag-tech">Python</li>
-                  <li class="tag tag-tech">Scikit-learn</li>
-                  <li class="tag tag-tech">Pandas</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="work-row fade-up">
-              <div class="work-row__main">
-                <h4>Weather ETL Pipeline</h4>
-                <p>OpenWeatherMap to PostgreSQL using SQLAlchemy. Fault-tolerant, automated via Windows Task Scheduler.</p>
-              </div>
-              <div class="work-row__meta">
-                <ul class="tag-list">
-                  <li class="tag tag-tech">Python</li>
-                  <li class="tag tag-tech">PostgreSQL</li>
-                  <li class="tag tag-tech">ETL</li>
+                  <li class="tag tag-tech">In progress</li>
                 </ul>
               </div>
             </div>
@@ -298,11 +277,11 @@
 
               <div class="about-stats">
                 <div class="stat-card">
-                  <div class="stat-card__value tnum">4+</div>
+                  <div class="stat-card__value tnum" data-count-to="4" data-count-suffix="+">4+</div>
                   <div class="stat-card__label">Years in tech</div>
                 </div>
                 <div class="stat-card">
-                  <div class="stat-card__value tnum">2027</div>
+                  <div class="stat-card__value tnum" data-count-to="2027">2027</div>
                   <div class="stat-card__label">MMAI completion</div>
                 </div>
               </div>
@@ -324,9 +303,7 @@
               <div class="info-row">
                 <p class="info-row__label">Targeting</p>
                 <p class="info-row__title">AI PM roles in financial services and tech</p>
-                <p class="info-row__sub">
-                  <span class="pill-list"><span>CIBC</span><span>RBC</span><span>TD</span><span>Intact</span><span>Scotiabank</span></span>
-                </p>
+                <p class="info-row__sub">Startups to Fortune 500</p>
               </div>
               <div class="info-row">
                 <p class="info-row__label">Building now</p>
@@ -345,29 +322,29 @@
             <h2 class="section-title">What I bring.</h2>
           </div>
 
-          <div class="skills-rows fade-up">
-            <div class="skill-row">
+          <div class="skills-rows">
+            <div class="skill-row" data-animate="up">
               <p class="skill-row__cat">Product management</p>
               <div class="skill-row__items">
-                <span>PRD writing</span><span>User story development</span><span>RICE prioritization</span><span>Sprint planning</span><span>Stakeholder management</span><span>Roadmapping</span>
+                <span data-animate="scale" data-stagger-step="40">PRD writing</span><span data-animate="scale" data-stagger-step="40">User story development</span><span data-animate="scale" data-stagger-step="40">RICE prioritization</span><span data-animate="scale" data-stagger-step="40">Sprint planning</span><span data-animate="scale" data-stagger-step="40">Stakeholder management</span><span data-animate="scale" data-stagger-step="40">Roadmapping</span>
               </div>
             </div>
-            <div class="skill-row">
+            <div class="skill-row" data-animate="up">
               <p class="skill-row__cat">AI &amp; data</p>
               <div class="skill-row__items">
-                <span>Prompt engineering</span><span>RAG architecture</span><span>Claude API</span><span>Python</span><span>Scikit-learn</span><span>ETL pipelines</span><span>PostgreSQL</span>
+                <span data-animate="scale" data-stagger-step="40">Prompt engineering</span><span data-animate="scale" data-stagger-step="40">RAG architecture</span><span data-animate="scale" data-stagger-step="40">Claude API</span><span data-animate="scale" data-stagger-step="40">Python</span><span data-animate="scale" data-stagger-step="40">Scikit-learn</span><span data-animate="scale" data-stagger-step="40">ETL pipelines</span><span data-animate="scale" data-stagger-step="40">PostgreSQL</span>
               </div>
             </div>
-            <div class="skill-row">
+            <div class="skill-row" data-animate="up">
               <p class="skill-row__cat">Technical</p>
               <div class="skill-row__items">
-                <span>React + TypeScript</span><span>Node.js + Express</span><span>REST API design</span><span>JWT auth</span><span>Git/GitHub</span><span>Robot Framework</span><span>Selenium</span>
+                <span data-animate="scale" data-stagger-step="40">React + TypeScript</span><span data-animate="scale" data-stagger-step="40">Node.js + Express</span><span data-animate="scale" data-stagger-step="40">REST API design</span><span data-animate="scale" data-stagger-step="40">JWT auth</span><span data-animate="scale" data-stagger-step="40">Git/GitHub</span><span data-animate="scale" data-stagger-step="40">Robot Framework</span><span data-animate="scale" data-stagger-step="40">Selenium</span>
               </div>
             </div>
-            <div class="skill-row">
+            <div class="skill-row" data-animate="up">
               <p class="skill-row__cat">Domain</p>
               <div class="skill-row__items">
-                <span>Banking products</span><span>Compliance</span><span>Agile delivery</span><span>Core banking</span><span>Requirements grooming</span>
+                <span data-animate="scale" data-stagger-step="40">Banking products</span><span data-animate="scale" data-stagger-step="40">Compliance</span><span data-animate="scale" data-stagger-step="40">Agile delivery</span><span data-animate="scale" data-stagger-step="40">Core banking</span><span data-animate="scale" data-stagger-step="40">Requirements grooming</span>
               </div>
             </div>
           </div>

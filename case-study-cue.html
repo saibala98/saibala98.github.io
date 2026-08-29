@@ -53,11 +53,11 @@
       <header class="cs-hero">
         <div class="container">
           <a href="index.html" class="cs-hero__back">&#8592; Back to portfolio</a>
-          <p class="eyebrow eyebrow--gold">Case study</p>
-          <h1>CUE</h1>
-          <p class="cs-hero__sub">AI Onboarding &amp; Knowledge Buddy</p>
-          <p class="text-small" style="margin-top: 8px">Role: Product Manager &amp; Developer &middot; 2026</p>
-          <div class="cs-hero__actions">
+          <p class="eyebrow eyebrow--gold" data-animate="up">Case study</p>
+          <h1 data-animate="up">CUE</h1>
+          <p class="cs-hero__sub" data-animate="up">AI Onboarding &amp; Knowledge Buddy</p>
+          <p class="text-small" style="margin-top: 8px" data-animate="up">Role: Product Manager &amp; Developer &middot; 2026</p>
+          <div class="cs-hero__actions" data-animate="up">
             <a href="./demo/app.html" target="_blank" rel="noreferrer" class="btn btn-primary">Try live demo</a>
             <a href="https://github.com/saibala98/cue-platform" target="_blank" rel="noreferrer" class="btn btn-secondary">GitHub code</a>
             <a href="#prd" class="btn btn-ghost">Full PRD</a>
@@ -68,32 +68,34 @@
       <!-- ============ EXECUTIVE SUMMARY ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2 class="section-title">Executive summary</h2>
-          <div class="cs-prose">
-            <p>
-              New employees at financial institutions are onboarded through a patchwork of PDFs, shared drives,
-              spreadsheets, and whoever happens to answer Slack first. Nothing is AI-searchable, nothing tracks who
-              actually completed mandatory compliance training, and "who approves this" lives entirely in people's
-              heads, which is a real problem the day that person is on vacation, or leaves.
-            </p>
-            <p>
-              CUE is a B2B platform that replaces that patchwork with one LOB-aware system: structured training
-              modules with quizzes, a mentor collaboration checklist, an AI assistant grounded in a company's own
-              documents and tribal-knowledge map, a people-leader completion dashboard, and a compliance audit log
-              built to be genuinely immutable at the database level, not just "we promise not to edit it."
-            </p>
+          <div class="fade-up">
+            <h2 class="section-title">Executive summary</h2>
+            <div class="cs-prose">
+              <p>
+                New employees at financial institutions are onboarded through a patchwork of PDFs, shared drives,
+                spreadsheets, and whoever happens to answer Slack first. Nothing is AI-searchable, nothing tracks who
+                actually completed mandatory compliance training, and "who approves this" lives entirely in people's
+                heads, which is a real problem the day that person is on vacation, or leaves.
+              </p>
+              <p>
+                CUE is a B2B platform that replaces that patchwork with one LOB-aware system: structured training
+                modules with quizzes, a mentor collaboration checklist, an AI assistant grounded in a company's own
+                documents and tribal-knowledge map, a people-leader completion dashboard, and a compliance audit log
+                built to be genuinely immutable at the database level, not just "we promise not to edit it."
+              </p>
+            </div>
           </div>
 
           <div class="cs-summary-grid">
-            <div class="card">
+            <div class="card" data-animate="up">
               <h4>Scope shipped</h4>
               <p>4 user roles, 9 database entities, full CRUD admin panels, working AI chat, live demo mode</p>
             </div>
-            <div class="card">
+            <div class="card" data-animate="up">
               <h4>Build approach</h4>
               <p>Solo product and full-stack build across 9 structured feature passes, each spec'd, built, and verified live</p>
             </div>
-            <div class="card">
+            <div class="card" data-animate="up">
               <h4>Current status</h4>
               <p>MVP1 (operational foundation) complete. MVP2 (real Claude API integration) in progress</p>
             </div>
@@ -104,20 +106,22 @@
       <!-- ============ THE PROBLEM ============ -->
       <section class="cs-section" id="problem">
         <div class="container">
-          <h2 class="section-title">The problem</h2>
-          <div class="cs-prose">
-            <p>Talk to anyone who has onboarded into a large financial institution and the same complaints surface every time:</p>
+          <div class="fade-up">
+            <h2 class="section-title">The problem</h2>
+            <div class="cs-prose">
+              <p>Talk to anyone who has onboarded into a large financial institution and the same complaints surface every time:</p>
+            </div>
           </div>
 
           <ol class="numbered-list">
-            <li>Training content lives in scattered PDFs and SharePoint folders with no search that actually understands a question.</li>
-            <li>"Who approves X" or "who do I contact for Y" is unwritten institutional knowledge; new hires just have to ask around until they find the right person.</li>
-            <li>Compliance teams need proof training happened and wasn't quietly edited after the fact, but most LMS completion records are just editable database rows.</li>
-            <li>Mentor programs run on goodwill and a spreadsheet, so nobody has a real-time view of which pairings are falling behind.</li>
-            <li>People leaders have no single dashboard showing who's overdue on what; they find out reactively, usually from an auditor.</li>
+            <li data-animate="left" data-stagger-step="60">Training content lives in scattered PDFs and SharePoint folders with no search that actually understands a question.</li>
+            <li data-animate="left" data-stagger-step="60">"Who approves X" or "who do I contact for Y" is unwritten institutional knowledge; new hires just have to ask around until they find the right person.</li>
+            <li data-animate="left" data-stagger-step="60">Compliance teams need proof training happened and wasn't quietly edited after the fact, but most LMS completion records are just editable database rows.</li>
+            <li data-animate="left" data-stagger-step="60">Mentor programs run on goodwill and a spreadsheet, so nobody has a real-time view of which pairings are falling behind.</li>
+            <li data-animate="left" data-stagger-step="60">People leaders have no single dashboard showing who's overdue on what; they find out reactively, usually from an auditor.</li>
           </ol>
 
-          <div class="cs-prose" style="margin-top: 28px">
+          <div class="cs-prose fade-up" style="margin-top: 28px">
             <h3>Why now?</h3>
             <p>
               Two things converged: LLMs got cheap and good enough that a real conversational Q&amp;A layer over
@@ -133,12 +137,14 @@
       <!-- ============ MARKET ANALYSIS ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2 class="section-title">Market analysis</h2>
-          <div class="cs-prose">
-            <p>The closest existing tools each solve one slice of this. None combine AI-native Q&amp;A with compliance-grade audit logging in one LOB-aware platform.</p>
+          <div class="fade-up">
+            <h2 class="section-title">Market analysis</h2>
+            <div class="cs-prose">
+              <p>The closest existing tools each solve one slice of this. None combine AI-native Q&amp;A with compliance-grade audit logging in one LOB-aware platform.</p>
+            </div>
           </div>
 
-          <div class="table-wrap">
+          <div class="table-wrap" data-animate="up">
             <table>
               <thead>
                 <tr>
@@ -182,17 +188,19 @@
       <!-- ============ SOLUTION & PRD ============ -->
       <section class="cs-section" id="prd">
         <div class="container">
-          <h2 class="section-title">Solution &amp; PRD</h2>
-          <div class="cs-prose">
-            <p>Five core capabilities define the product, each mapped to one of the problems above:</p>
+          <div class="fade-up">
+            <h2 class="section-title">Solution &amp; PRD</h2>
+            <div class="cs-prose">
+              <p>Five core capabilities define the product, each mapped to one of the problems above:</p>
+            </div>
           </div>
 
           <ol class="numbered-list">
-            <li><strong>AI Knowledge Buddy</strong>: RAG-powered Q&amp;A grounded in a LOB's own documents, so answers cite an actual source instead of guessing.</li>
-            <li><strong>LOB-Specific Training Delivery</strong>: versioned modules with lessons and quizzes, scoped to the employee's line of business.</li>
-            <li><strong>Compliance Audit Logging</strong>: an append-only completion record enforced by a database trigger, not just an app-layer convention.</li>
-            <li><strong>Mentor Workflow</strong>: a structured 6-session collaboration checklist shared between mentor and mentee, with real progress tracking.</li>
-            <li><strong>Leader Dashboard</strong>: one view of completions, overdue items, and active mentor assignments across a people leader's whole team.</li>
+            <li data-animate="left" data-stagger-step="60"><strong>AI Knowledge Buddy</strong>: RAG-powered Q&amp;A grounded in a LOB's own documents, so answers cite an actual source instead of guessing.</li>
+            <li data-animate="left" data-stagger-step="60"><strong>LOB-Specific Training Delivery</strong>: versioned modules with lessons and quizzes, scoped to the employee's line of business.</li>
+            <li data-animate="left" data-stagger-step="60"><strong>Compliance Audit Logging</strong>: an append-only completion record enforced by a database trigger, not just an app-layer convention.</li>
+            <li data-animate="left" data-stagger-step="60"><strong>Mentor Workflow</strong>: a structured 6-session collaboration checklist shared between mentor and mentee, with real progress tracking.</li>
+            <li data-animate="left" data-stagger-step="60"><strong>Leader Dashboard</strong>: one view of completions, overdue items, and active mentor assignments across a people leader's whole team.</li>
           </ol>
         </div>
       </section>
@@ -200,10 +208,10 @@
       <!-- ============ USER PERSONAS ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2 class="section-title">User personas</h2>
+          <h2 class="section-title fade-up">User personas</h2>
 
           <div class="persona-grid">
-            <div class="card persona-card">
+            <div class="card persona-card" data-animate="up">
               <span class="persona-card__name">Alex</span>
               <span class="persona-card__role">26 &middot; New joinee, GIC Operations Analyst</span>
               <dl>
@@ -222,7 +230,7 @@
               </dl>
             </div>
 
-            <div class="card persona-card">
+            <div class="card persona-card" data-animate="up">
               <span class="persona-card__name">Michael</span>
               <span class="persona-card__role">42 &middot; People leader, VP Operations</span>
               <dl>
@@ -241,7 +249,7 @@
               </dl>
             </div>
 
-            <div class="card persona-card">
+            <div class="card persona-card" data-animate="up">
               <span class="persona-card__name">Jennifer</span>
               <span class="persona-card__role">38 &middot; Compliance admin, L&amp;D Manager</span>
               <dl>
@@ -266,10 +274,10 @@
       <!-- ============ MVP ROADMAP ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2 class="section-title">MVP roadmap</h2>
+          <h2 class="section-title fade-up">MVP roadmap</h2>
 
           <div class="roadmap-grid">
-            <div class="card roadmap-card">
+            <div class="card roadmap-card" data-animate="up">
               <span class="tag tag-status">MVP1 &middot; Weeks 1-8</span>
               <h3 style="margin-top: 14px">Operational foundation</h3>
               <ul>
@@ -281,7 +289,7 @@
                 <li>Knowledge map admin (structured tribal knowledge)</li>
               </ul>
             </div>
-            <div class="card roadmap-card">
+            <div class="card roadmap-card" data-animate="up">
               <span class="tag tag-status is-progress">MVP2 &middot; Weeks 9-12</span>
               <h3 style="margin-top: 14px">Intelligence and compliance layer</h3>
               <ul>
@@ -294,7 +302,7 @@
             </div>
           </div>
 
-          <div class="table-wrap">
+          <div class="table-wrap" data-animate="up">
             <table>
               <thead>
                 <tr>
@@ -343,22 +351,22 @@
       <!-- ============ TECHNICAL ARCHITECTURE ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2 class="section-title">Technical architecture</h2>
+          <h2 class="section-title fade-up">Technical architecture</h2>
 
           <div class="arch-grid">
-            <div class="card arch-card">
+            <div class="card arch-card" data-animate="up">
               <span class="arch-card__label">Frontend</span>
               <p>React + TypeScript + Tailwind CSS, built with Vite. One typed API client per resource, shared types between every page and its data layer.</p>
             </div>
-            <div class="card arch-card">
+            <div class="card arch-card" data-animate="up">
               <span class="arch-card__label">Backend</span>
               <p>Node.js + Express + TypeORM. Every async route wrapped in a shared error handler; role-based middleware guards every non-public endpoint.</p>
             </div>
-            <div class="card arch-card">
+            <div class="card arch-card" data-animate="up">
               <span class="arch-card__label">Database</span>
               <p>PostgreSQL, with migration-based schema history and a database-level trigger enforcing immutability on completion records, not just an app-layer rule.</p>
             </div>
-            <div class="card arch-card">
+            <div class="card arch-card" data-animate="up">
               <span class="arch-card__label">AI</span>
               <p>Claude API (Anthropic), RAG-style: retrieval against LOB documents and the knowledge map first, generation grounded in what's retrieved.</p>
             </div>
@@ -369,27 +377,31 @@
       <!-- ============ AI STRATEGY ============ -->
       <section class="cs-section" id="ai-strategy">
         <div class="container">
-          <h2 class="section-title">AI strategy</h2>
-          <div class="cs-prose">
-            <p>How the Knowledge Buddy actually works, end to end:</p>
+          <div class="fade-up">
+            <h2 class="section-title">AI strategy</h2>
+            <div class="cs-prose">
+              <p>How the Knowledge Buddy actually works, end to end:</p>
+            </div>
           </div>
 
           <div class="rag-steps">
-            <div class="card">1. Documents are uploaded per line-of-business and chunked into searchable sections.</div>
-            <div class="card">2. An incoming question is scored against those chunks (and the knowledge map) for relevance.</div>
-            <div class="card">3. The top-matching chunk becomes grounding context: the thing the answer actually has to be true to.</div>
-            <div class="card">4. Claude answers using that context, with the source cited back to the user, not invented from general knowledge.</div>
+            <div class="card" data-animate="up">1. Documents are uploaded per line-of-business and chunked into searchable sections.</div>
+            <div class="card" data-animate="up">2. An incoming question is scored against those chunks (and the knowledge map) for relevance.</div>
+            <div class="card" data-animate="up">3. The top-matching chunk becomes grounding context: the thing the answer actually has to be true to.</div>
+            <div class="card" data-animate="up">4. Claude answers using that context, with the source cited back to the user, not invented from general knowledge.</div>
           </div>
 
-          <h3>System prompt design (MVP2)</h3>
-          <div class="cs-prose">
-            <p>
-              MVP1 ships this retrieval step wired to a deterministic keyword-matching mock instead of a live model
-              call, intentionally, so the retrieval architecture could be validated end-to-end before spending on API
-              calls. The system prompt below is the one designed for the MVP2 swap-in:
-            </p>
+          <div class="fade-up">
+            <h3>System prompt design (MVP2)</h3>
+            <div class="cs-prose">
+              <p>
+                MVP1 ships this retrieval step wired to a deterministic keyword-matching mock instead of a live model
+                call, intentionally, so the retrieval architecture could be validated end-to-end before spending on API
+                calls. The system prompt below is the one designed for the MVP2 swap-in:
+              </p>
+            </div>
           </div>
-          <div class="code-block">
+          <div class="code-block" data-animate="up">
             <span class="code-block__label">system prompt - knowledge buddy (MVP2)</span>
             <pre><span class="tok-com">You are CUE's Knowledge Buddy, an onboarding assistant for {lobName}.</span>
 
@@ -411,27 +423,27 @@
 {employee_question}</pre>
           </div>
 
-          <h3 style="margin-top: 40px">Three answer types</h3>
+          <h3 class="fade-up" style="margin-top: 40px">Three answer types</h3>
           <div class="answer-types">
-            <div class="card answer-type">
+            <div class="card answer-type" data-animate="up">
               <span class="answer-type__num">Type 1</span>
               <h4>Document Q&amp;A</h4>
               <p>Answers grounded in an uploaded LOB document, with the source file and section cited alongside the answer.</p>
             </div>
-            <div class="card answer-type">
+            <div class="card answer-type" data-animate="up">
               <span class="answer-type__num">Type 2</span>
               <h4>Knowledge map lookup</h4>
               <p>"Who approves X" or "who do I contact for Y", resolved from the structured knowledge map, not free text.</p>
             </div>
-            <div class="card answer-type">
+            <div class="card answer-type" data-animate="up">
               <span class="answer-type__num">Type 3</span>
               <h4>Course tutoring</h4>
               <p>Stuck on a quiz question: the assistant points back to the exact lesson content instead of just giving the answer.</p>
             </div>
           </div>
 
-          <h3 style="margin-top: 40px">Cost analysis</h3>
-          <div class="table-wrap">
+          <h3 class="fade-up" style="margin-top: 40px">Cost analysis</h3>
+          <div class="table-wrap" data-animate="up">
             <table>
               <thead>
                 <tr>
@@ -461,21 +473,25 @@
       <!-- ============ WHAT I BUILT ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2 class="section-title">What I built</h2>
-          <div class="cs-prose">
-            <p>A few of the more deliberate decisions, with the actual code behind them:</p>
+          <div class="fade-up">
+            <h2 class="section-title">What I built</h2>
+            <div class="cs-prose">
+              <p>A few of the more deliberate decisions, with the actual code behind them:</p>
+            </div>
           </div>
 
-          <h3>Immutable audit log trigger (SQL)</h3>
-          <div class="cs-prose">
-            <p>
-              Compliance completion records can't be "probably" immutable; an app-layer rule is one bug away from a
-              regulator finding an edited row. This is enforced at the database level: any <code>UPDATE</code> or
-              <code>DELETE</code> on <code>completion_records</code> is rejected by Postgres itself, before it ever
-              reaches the application.
-            </p>
+          <div class="fade-up">
+            <h3>Immutable audit log trigger (SQL)</h3>
+            <div class="cs-prose">
+              <p>
+                Compliance completion records can't be "probably" immutable; an app-layer rule is one bug away from a
+                regulator finding an edited row. This is enforced at the database level: any <code>UPDATE</code> or
+                <code>DELETE</code> on <code>completion_records</code> is rejected by Postgres itself, before it ever
+                reaches the application.
+              </p>
+            </div>
           </div>
-          <div class="code-block">
+          <div class="code-block" data-animate="up">
             <span class="code-block__label">migration - completion_immutability trigger</span>
             <pre><span class="tok-kw">CREATE OR REPLACE FUNCTION</span> <span class="tok-fn">prevent_completion_modification</span>()
 <span class="tok-kw">RETURNS TRIGGER AS</span> $$
@@ -489,15 +505,17 @@ $$ <span class="tok-kw">LANGUAGE plpgsql</span>;
 <span class="tok-kw">FOR EACH ROW EXECUTE FUNCTION</span> <span class="tok-fn">prevent_completion_modification</span>();</pre>
           </div>
 
-          <h3 style="margin-top: 40px">RAG retrieval function (TypeScript)</h3>
-          <div class="cs-prose">
-            <p>
-              The retrieval layer is written to the same interface a real vector-similarity search would expose, so
-              swapping keyword-overlap scoring for real embeddings later is a drop-in change, not a rewrite of every
-              caller.
-            </p>
+          <div class="fade-up">
+            <h3 style="margin-top: 40px">RAG retrieval function (TypeScript)</h3>
+            <div class="cs-prose">
+              <p>
+                The retrieval layer is written to the same interface a real vector-similarity search would expose, so
+                swapping keyword-overlap scoring for real embeddings later is a drop-in change, not a rewrite of every
+                caller.
+              </p>
+            </div>
           </div>
-          <div class="code-block">
+          <div class="code-block" data-animate="up">
             <span class="code-block__label">retrievalService.ts</span>
             <pre><span class="tok-com">/** Stand-in for real vector search, same interface a real</span>
 <span class="tok-com"> *  semantic search would expose, so callers don't change later. */</span>
@@ -521,21 +539,21 @@ $$ <span class="tok-kw">LANGUAGE plpgsql</span>;
       <!-- ============ LESSONS LEARNED ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2 class="section-title">Lessons learned</h2>
+          <h2 class="section-title fade-up">Lessons learned</h2>
           <div class="lessons-grid">
-            <div class="card">
+            <div class="card" data-animate="up">
               <h4>Ship the retrieval architecture before the model call</h4>
               <p>Building the mock RAG layer first, same interface, no live API, let me validate the whole product loop (chunking, scoring, citation) without spending on tokens or waiting on rate limits.</p>
             </div>
-            <div class="card">
+            <div class="card" data-animate="up">
               <h4>Compliance requirements shape the schema, not just the UI</h4>
               <p>"Make the audit log immutable" isn't a frontend feature; it changed how I designed the database migration from the very first pass.</p>
             </div>
-            <div class="card">
+            <div class="card" data-animate="up">
               <h4>A demo mode is a product decision, not an afterthought</h4>
               <p>Deciding early that CUE needed a backend-free, mock-data demo mode for stakeholder walkthroughs shaped the API layer to be cleanly swappable from day one.</p>
             </div>
-            <div class="card">
+            <div class="card" data-animate="up">
               <h4>Personas keep scope honest</h4>
               <p>Every feature I built maps back to something Alex, Michael, or Jennifer specifically needed; that discipline is what kept a 9-entity platform from sprawling into a features junk drawer.</p>
             </div>
@@ -546,12 +564,12 @@ $$ <span class="tok-kw">LANGUAGE plpgsql</span>;
       <!-- ============ WHAT'S NEXT ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2 class="section-title">What's next</h2>
+          <h2 class="section-title fade-up">What's next</h2>
           <ol class="numbered-list">
-            <li>Wire the live Claude API in behind the existing retrieval interface, no changes needed above the service layer.</li>
-            <li>Real document ingestion (PDF/DOCX parsing) instead of pre-chunked seed content.</li>
-            <li>Usage-based cost monitoring dashboard for compliance admins running live Claude traffic.</li>
-            <li>Pilot with a real financial-services LOB team to validate the knowledge map against actual tribal knowledge.</li>
+            <li data-animate="left" data-stagger-step="60">Wire the live Claude API in behind the existing retrieval interface, no changes needed above the service layer.</li>
+            <li data-animate="left" data-stagger-step="60">Real document ingestion (PDF/DOCX parsing) instead of pre-chunked seed content.</li>
+            <li data-animate="left" data-stagger-step="60">Usage-based cost monitoring dashboard for compliance admins running live Claude traffic.</li>
+            <li data-animate="left" data-stagger-step="60">Pilot with a real financial-services LOB team to validate the knowledge map against actual tribal knowledge.</li>
           </ol>
         </div>
       </section>
