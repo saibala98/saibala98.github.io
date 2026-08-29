@@ -107,6 +107,23 @@ if (prefersReducedMotion) {
   document.querySelectorAll('.fade-up').forEach((el) => el.classList.add('is-visible'));
 }
 
+// ============ Scale the embedded live-demo iframe to fit its preview box ============
+// The demo is a real desktop-width app; without this it would render at 1:1
+// scale and only show a cropped fragment inside the small hero preview.
+const demoViewport = document.querySelector('.cue-demo-viewport');
+const demoFrame = document.querySelector('.cue-demo__frame');
+if (demoViewport && demoFrame) {
+  const DEMO_DESIGN_WIDTH = 1280;
+  const resizeDemo = () => {
+    const scale = demoViewport.clientWidth / DEMO_DESIGN_WIDTH;
+    demoFrame.style.setProperty('--demo-scale', scale.toFixed(4));
+  };
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(resizeDemo).observe(demoViewport);
+  }
+  resizeDemo();
+}
+
 // ============ Active nav link highlighting (IntersectionObserver, no scroll listener) ============
 const navAnchors = document.querySelectorAll('a[data-nav]');
 if (navAnchors.length && 'IntersectionObserver' in window) {

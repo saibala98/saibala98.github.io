@@ -553,47 +553,6 @@ button {
   color: var(--muted);
 }
 
-.hero__panel {
-  position: relative;
-}
-.hero__mockup-wrap {
-  margin-top: -32px;
-  margin-left: 32px;
-  position: relative;
-  z-index: 1;
-}
-
-/* Live demo preview - a real embedded component preview, not a fake screenshot */
-.hero-demo {
-  display: block;
-  position: relative;
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow:
-    0 8px 32px rgba(13, 37, 61, 0.08),
-    0 2px 6px rgba(13, 37, 61, 0.04);
-}
-.hero-demo__frame {
-  width: 100%;
-  height: 260px;
-  border: 0;
-  display: block;
-  pointer-events: none;
-  background: var(--canvas-alt);
-}
-.hero-demo__badge {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  background: var(--indigo-soft);
-  color: var(--on-primary);
-  font: 700 0.75rem var(--font-body);
-  padding: 6px 14px;
-  border-radius: 9999px;
-}
-
 /* Trust strip - its own slim section below the hero, not inside it */
 .trust-bar {
   border-bottom: 1px solid var(--hairline);
@@ -649,6 +608,53 @@ button {
   color: var(--muted);
   margin: 0;
 }
+/* Live demo preview - a real embedded component preview, not a fake screenshot */
+.cue-demo {
+  position: relative;
+  margin-top: 40px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(13, 37, 61, 0.08),
+    0 2px 6px rgba(13, 37, 61, 0.04);
+}
+.cue-demo-viewport {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  overflow: hidden;
+  background: var(--canvas-alt);
+}
+.cue-demo__frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1280px;
+  height: 800px;
+  border: 0;
+  display: block;
+  background: var(--canvas-alt);
+  transform-origin: top left;
+  transform: scale(var(--demo-scale, 0.36));
+}
+.cue-demo__badge {
+  position: absolute;
+  z-index: 2;
+  right: 12px;
+  bottom: 12px;
+  background: var(--indigo-soft);
+  color: var(--on-primary);
+  font: 700 0.75rem var(--font-body);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  transition: background var(--ease);
+}
+.cue-demo__badge:hover {
+  background: var(--primary);
+}
+
 .cue-actions {
   margin-top: 32px;
   display: flex;
@@ -1241,9 +1247,6 @@ tbody tr.is-highlight td {
   .hero .container {
     grid-template-columns: 1fr;
   }
-  .hero__mockup-wrap {
-    margin-left: 0;
-  }
   .about-grid,
   .cue-grid,
   .roadmap-grid,
@@ -1308,6 +1311,9 @@ tbody tr.is-highlight td {
   .skill-row {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+  .cue-demo-viewport {
+    height: 300px;
   }
   .work-row {
     flex-direction: column;
