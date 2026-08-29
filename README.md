@@ -1,8 +1,43 @@
 # saibala98.github.io
 
-Sai Saiprasad's PM portfolio — plain HTML/CSS/JS, no build step. "Fintech
-Pro" design system (navy / gold / blue), single-page portfolio plus a full
-CUE case study page, with a live, click-to-load embed of the CUE demo.
+Sai Saiprasad's PM portfolio.
+
+**The live site is now built from `portfolio-react/`** — a React + Vite +
+Framer Motion rewrite of the original static site, deployed automatically
+via GitHub Actions (see "Deploying to GitHub Pages" below). The plain
+HTML/CSS/JS files at the repo root (`index.html`, `styles.css`, `main.js`,
+`case-study-cue.html`) are the previous static implementation this was
+converted from — they're no longer what's served, kept here for
+reference. Everything below the "React app" section documents that
+earlier version.
+
+## React app (`portfolio-react/`)
+
+```
+portfolio-react/
+  src/
+    main.jsx            Entry point — BrowserRouter + MotionConfig
+    App.jsx              Routes: "/" -> Home, "/case-study" -> CaseStudy
+    motion.js             Shared Framer Motion variants
+    styles.css             Carried over from the static site's design system
+    pages/                Home.jsx, CaseStudy.jsx
+    components/           Nav, Hero, CandidateBrief, CueCaseStudy, MoreWork,
+                           About, Skills, Contact, Footer
+  public/demo/           Vendored CUE demo app (same as the static site's demo/)
+```
+
+Run locally:
+
+```bash
+cd portfolio-react
+npm install
+npm run dev
+```
+
+Nav takes a `home` prop (`Nav`/`Footer` render slightly differently on
+the case study page than the homepage, matching a real difference that
+existed in the original static pages — see the comments in `Nav.jsx` /
+`Footer.jsx`).
 
 ## Files
 
@@ -83,11 +118,35 @@ unnecessary.
 
 ## Deploying to GitHub Pages
 
-This repo's name (`<username>.github.io`) is GitHub's special "user site"
-name — Pages serves it at the domain root, no build step needed.
+The React app needs an actual build step (`npm run build`), which plain
+"deploy from a branch" Pages hosting can't do — so this repo deploys via
+`.github/workflows/deploy.yml`, a GitHub Actions workflow that builds
+`portfolio-react/` and publishes `portfolio-react/dist/` on every push to
+`main` that touches that folder.
+
+**One-time setup** (not automatable — needs a manual click in GitHub's UI):
 
 1. Push this repo to GitHub as **`saibala98/saibala98.github.io`**.
-2. Repo **Settings → Pages → Source → Deploy from a branch → `main` / `(root)`**.
-3. Visit `https://saibala98.github.io/` a minute or two later.
+2. Repo **Settings → Pages → Source → GitHub Actions** (not "Deploy from a
+   branch" — that setting is for the old static-file flow and won't run
+   the build).
+3. Push to `main` (or run the workflow manually from the Actions tab) and
+   wait for it to finish.
+4. Visit `https://saibala98.github.io/` a minute or two later.
 
-Every push to `main` updates the live site automatically.
+**Client-side routing on GitHub Pages**: `portfolio-react` uses React
+Router's `BrowserRouter`, so `/case-study` only exists once React mounts
+and reads the URL — GitHub Pages has no server-side rewrites, so a direct
+visit or a refresh on that path would otherwise 404. The workflow's build
+step copies the built `index.html` to `404.html`; GitHub Pages serves
+that for any unmatched path, which loads the same app bundle under the
+originally-requested URL, and React Router renders the right route from
+there. This regenerates on every deploy since the referenced asset
+filenames are content-hashed and change on every build — don't hand-edit
+or commit a static `404.html`, it'll drift out of sync with the next
+build.
+
+This repo's name (`<username>.github.io`) is GitHub's special "user site"
+name, so Pages serves it at the domain root — no Vite `base` path
+configuration needed (that's only required for project pages like
+`username.github.io/repo-name`).
