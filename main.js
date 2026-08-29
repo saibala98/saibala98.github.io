@@ -1,29 +1,70 @@
-// ============ Sticky nav: border/background on scroll ============
-const header = document.getElementById('siteHeader');
-function updateHeaderScrollState() {
-  if (!header) return;
-  header.classList.toggle('is-scrolled', window.scrollY > 8);
-}
-updateHeaderScrollState();
-window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
+// ============ Reduced motion check ============
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// ============ Mobile nav toggle ============
+// ============ Sticky nav border on scroll (IntersectionObserver, no scroll listener) ============
+const header = document.getElementById('siteHeader');
+const scrollSentinel = document.getElementById('scrollSentinel');
+if (header && scrollSentinel && 'IntersectionObserver' in window) {
+  const sentinelObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        header.classList.toggle('is-scrolled', !entry.isIntersecting);
+      });
+    },
+    { threshold: 0 },
+  );
+  sentinelObserver.observe(scrollSentinel);
+}
+
+// ============ Mobile nav toggle with ESC close + focus trap ============
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 if (navToggle && navLinks) {
+  const closeNav = () => {
+    navLinks.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  };
+  const openNav = () => {
+    navLinks.classList.add('is-open');
+    navToggle.setAttribute('aria-expanded', 'true');
+  };
+
   navToggle.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('is-open');
-    navToggle.setAttribute('aria-expanded', String(open));
+    if (navLinks.classList.contains('is-open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
   });
+
   navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('is-open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
+    link.addEventListener('click', closeNav);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || !navLinks.classList.contains('is-open')) return;
+    closeNav();
+    navToggle.focus();
+  });
+
+  navLinks.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab' || !navLinks.classList.contains('is-open')) return;
+    const focusable = Array.from(navLinks.querySelectorAll('a'));
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   });
 }
 
-// ============ Smooth scroll for in-page anchor links ============
+// ============ Smooth scroll for in-page anchor links (60px offset, no scroll listener) ============
+const NAV_OFFSET = 60;
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener('click', (e) => {
     const targetId = link.getAttribute('href');
@@ -31,94 +72,63 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
     const target = document.querySelector(targetId);
     if (!target) return;
     e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const top = target.getBoundingClientRect().top + window.pageYOffset - NAV_OFFSET;
+    window.scrollTo({ top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     history.pushState(null, '', targetId);
   });
 });
 
-// ============ Scroll-triggered fade-up animations ============
-const fadeEls = document.querySelectorAll('.fade-up');
-if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(
+// ============ Scroll-triggered fade-up animations, staggered per parent ============
+const fadeGroups = new Map();
+document.querySelectorAll('.fade-up').forEach((el) => {
+  const parent = el.parentElement;
+  if (!fadeGroups.has(parent)) fadeGroups.set(parent, []);
+  fadeGroups.get(parent).push(el);
+});
+
+if (prefersReducedMotion) {
+  document.querySelectorAll('.fade-up').forEach((el) => el.classList.add('is-visible'));
+} else if ('IntersectionObserver' in window) {
+  const fadeObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const siblings = fadeGroups.get(entry.target.parentElement) || [entry.target];
+        const index = siblings.indexOf(entry.target);
+        const delay = Math.max(index, 0) * 80;
+        setTimeout(() => entry.target.classList.add('is-visible'), delay);
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.1 },
+  );
+  document.querySelectorAll('.fade-up').forEach((el) => fadeObserver.observe(el));
+} else {
+  document.querySelectorAll('.fade-up').forEach((el) => el.classList.add('is-visible'));
+}
+
+// ============ Active nav link highlighting (IntersectionObserver, no scroll listener) ============
+const navAnchors = document.querySelectorAll('a[data-nav]');
+if (navAnchors.length && 'IntersectionObserver' in window) {
+  const sectionMap = new Map();
+  navAnchors.forEach((a) => {
+    const section = document.querySelector(a.getAttribute('href'));
+    if (section) sectionMap.set(section, a);
+  });
+
+  const sectionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
+        const link = sectionMap.get(entry.target);
+        if (!link) return;
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
+          navAnchors.forEach((a) => a.classList.remove('is-active'));
+          link.classList.add('is-active');
         }
       });
     },
-    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
+    { rootMargin: '-45% 0px -50% 0px', threshold: 0 },
   );
-  fadeEls.forEach((el) => observer.observe(el));
-} else {
-  fadeEls.forEach((el) => el.classList.add('is-visible'));
+
+  sectionMap.forEach((_, section) => sectionObserver.observe(section));
 }
-
-// ============ Active nav link highlighting on scroll ============
-const navAnchors = document.querySelectorAll('a[data-nav]');
-const sections = Array.from(navAnchors)
-  .map((a) => document.querySelector(a.getAttribute('href')))
-  .filter(Boolean);
-
-function updateActiveNavLink() {
-  if (sections.length === 0) return;
-  const scrollPos = window.scrollY + 120;
-  let currentId = sections[0].id;
-  for (const section of sections) {
-    if (section.offsetTop <= scrollPos) currentId = section.id;
-  }
-  navAnchors.forEach((a) => {
-    a.classList.toggle('is-active', a.getAttribute('href') === `#${currentId}`);
-  });
-}
-updateActiveNavLink();
-window.addEventListener('scroll', updateActiveNavLink, { passive: true });
-
-// ============ Contact form validation (no real submission) ============
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  const statusEl = document.getElementById('contactFormStatus');
-
-  function setFieldError(fieldId, hasError) {
-    const field = document.getElementById(fieldId);
-    if (field) field.classList.toggle('has-error', hasError);
-  }
-
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const name = /** @type {HTMLInputElement} */ (document.getElementById('cf-name'));
-    const email = /** @type {HTMLInputElement} */ (document.getElementById('cf-email'));
-    const message = /** @type {HTMLTextAreaElement} */ (document.getElementById('cf-message'));
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const nameValid = name.value.trim().length > 0;
-    const emailValid = emailPattern.test(email.value.trim());
-    const messageValid = message.value.trim().length > 0;
-
-    setFieldError('fieldName', !nameValid);
-    setFieldError('fieldEmail', !emailValid);
-    setFieldError('fieldMessage', !messageValid);
-
-    if (!nameValid || !emailValid || !messageValid) {
-      if (statusEl) {
-        statusEl.textContent = 'Please fix the highlighted fields above.';
-        statusEl.style.color = 'var(--danger)';
-      }
-      return;
-    }
-
-    // This portfolio's contact form is presentational — no backend is wired
-    // up to receive submissions. Reach out via the direct links instead.
-    if (statusEl) {
-      statusEl.textContent = "Thanks! This demo form doesn't send yet — please reach out directly via email or LinkedIn instead.";
-      statusEl.style.color = 'var(--success)';
-    }
-    contactForm.reset();
-  });
-}
-
-// ============ Footer year (kept in sync automatically) ============
-const yearEls = document.querySelectorAll('[data-year]');
-yearEls.forEach((el) => (el.textContent = String(new Date().getFullYear())));

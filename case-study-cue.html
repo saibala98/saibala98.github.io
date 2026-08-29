@@ -3,53 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CUE Case Study — Sai Saiprasad</title>
+    <title>CUE Case Study - Sai Saiprasad, AI Product Manager</title>
     <meta
       name="description"
       content="Full case study: how CUE, an AI onboarding platform for financial services, went from problem discovery to a working MVP."
     />
-    <meta property="og:title" content="CUE Case Study — Sai Saiprasad" />
+    <meta property="og:title" content="CUE Case Study - Sai Saiprasad" />
     <meta
       property="og:description"
       content="Full case study: how CUE, an AI onboarding platform for financial services, went from problem discovery to a working MVP."
     />
     <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary" />
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <div id="scrollSentinel" style="position: absolute; top: 0; height: 1px; width: 1px" aria-hidden="true"></div>
 
     <header class="site-header" id="siteHeader">
       <nav class="nav" aria-label="Primary">
         <a href="index.html#top" class="nav__brand">
           <span class="nav__brand-name">SAI SAIPRASAD</span>
-          <span class="nav__brand-role">AI Product Manager</span>
         </a>
+        <button type="button" class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav__links" id="navLinks">
+          <li><a href="index.html#cue">CUE</a></li>
+          <li><a href="index.html#work">Work</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
         <div class="nav__actions">
-          <a href="index.html#contact" class="btn btn-primary btn-small">Let's Talk</a>
+          <a href="index.html#contact" class="btn btn-primary btn-small">Let's talk &#8594;</a>
         </div>
       </nav>
     </header>
 
     <main id="main">
-      <!-- ============ HEADER ============ -->
-      <header class="cs-header dot-grid">
+      <!-- ============ HERO ============ -->
+      <header class="cs-hero">
         <div class="container">
-          <a href="index.html" class="cs-header__back">← Back to Portfolio</a>
-          <h1>CUE — AI Onboarding &amp; Knowledge Buddy</h1>
-          <p class="cs-header__subtitle">B2B SaaS Platform · Full Case Study</p>
-          <p class="cs-header__meta">Role: Product Manager &amp; Developer · 2026</p>
-          <div class="cs-header__actions">
-            <a href="./demo/" target="_blank" rel="noreferrer" class="btn btn-primary">Live Demo</a>
-            <a href="https://github.com/saibala98/cue-platform" target="_blank" rel="noreferrer" class="btn btn-secondary">GitHub</a>
-            <a href="#prd" class="btn btn-ghost">Full PRD Document</a>
+          <a href="index.html" class="cs-hero__back">&#8592; Back to portfolio</a>
+          <p class="eyebrow eyebrow--gold">Case study</p>
+          <h1>CUE</h1>
+          <p class="cs-hero__sub">AI Onboarding &amp; Knowledge Buddy</p>
+          <p class="text-small" style="margin-top: 8px">Role: Product Manager &amp; Developer &middot; 2026</p>
+          <div class="cs-hero__actions">
+            <a href="./demo/" target="_blank" rel="noreferrer" class="btn btn-primary">Try live demo</a>
+            <a href="https://github.com/saibala98/cue-platform" target="_blank" rel="noreferrer" class="btn btn-secondary">GitHub code</a>
+            <a href="#prd" class="btn btn-ghost">Full PRD</a>
           </div>
         </div>
       </header>
@@ -57,19 +68,19 @@
       <!-- ============ EXECUTIVE SUMMARY ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2>Executive Summary</h2>
+          <h2 class="section-title">Executive summary</h2>
           <div class="cs-prose">
             <p>
-              New employees at financial institutions are onboarded through a patchwork of PDFs, shared drives, spreadsheets,
-              and whoever happens to answer Slack first. Nothing is AI-searchable, nothing tracks who actually completed
-              mandatory compliance training, and "who approves this" lives entirely in people's heads — which is a real
-              problem the day that person is on vacation, or leaves.
+              New employees at financial institutions are onboarded through a patchwork of PDFs, shared drives,
+              spreadsheets, and whoever happens to answer Slack first. Nothing is AI-searchable, nothing tracks who
+              actually completed mandatory compliance training, and "who approves this" lives entirely in people's
+              heads, which is a real problem the day that person is on vacation, or leaves.
             </p>
             <p>
-              CUE is a B2B platform that replaces that patchwork with one LOB-aware system: structured training modules with
-              quizzes, a mentor collaboration checklist, an AI assistant grounded in a company's own documents and
-              tribal-knowledge map, a people-leader completion dashboard, and a compliance audit log built to be genuinely
-              immutable at the database level — not just "we promise not to edit it."
+              CUE is a B2B platform that replaces that patchwork with one LOB-aware system: structured training
+              modules with quizzes, a mentor collaboration checklist, an AI assistant grounded in a company's own
+              documents and tribal-knowledge map, a people-leader completion dashboard, and a compliance audit log
+              built to be genuinely immutable at the database level, not just "we promise not to edit it."
             </p>
           </div>
 
@@ -80,11 +91,11 @@
             </div>
             <div class="card">
               <h4>Build approach</h4>
-              <p>Solo product + full-stack build across 9 structured feature passes, each spec'd, built, and verified live</p>
+              <p>Solo product and full-stack build across 9 structured feature passes, each spec'd, built, and verified live</p>
             </div>
             <div class="card">
               <h4>Current status</h4>
-              <p>MVP1 (operational foundation) complete · MVP2 (real Claude API integration) in progress</p>
+              <p>MVP1 (operational foundation) complete. MVP2 (real Claude API integration) in progress</p>
             </div>
           </div>
         </div>
@@ -93,26 +104,27 @@
       <!-- ============ THE PROBLEM ============ -->
       <section class="cs-section" id="problem">
         <div class="container">
-          <h2>The Problem</h2>
+          <h2 class="section-title">The problem</h2>
           <div class="cs-prose">
             <p>Talk to anyone who has onboarded into a large financial institution and the same complaints surface every time:</p>
           </div>
 
           <ol class="numbered-list">
             <li>Training content lives in scattered PDFs and SharePoint folders with no search that actually understands a question.</li>
-            <li>"Who approves X" or "who do I contact for Y" is unwritten institutional knowledge — new hires just have to ask around until they find the right person.</li>
+            <li>"Who approves X" or "who do I contact for Y" is unwritten institutional knowledge; new hires just have to ask around until they find the right person.</li>
             <li>Compliance teams need proof training happened and wasn't quietly edited after the fact, but most LMS completion records are just editable database rows.</li>
             <li>Mentor programs run on goodwill and a spreadsheet, so nobody has a real-time view of which pairings are falling behind.</li>
-            <li>People leaders have no single dashboard showing who's overdue on what — they find out reactively, usually from an auditor.</li>
+            <li>People leaders have no single dashboard showing who's overdue on what; they find out reactively, usually from an auditor.</li>
           </ol>
 
           <div class="cs-prose" style="margin-top: 28px">
             <h3>Why now?</h3>
             <p>
-              Two things converged: LLMs got cheap and good enough that a real conversational Q&amp;A layer over internal
-              documents is now a weekend-scale build rather than a research project, and financial institutions are under
-              increasing regulatory pressure to prove — not just claim — that mandatory training was completed and hasn't
-              been tampered with. A platform that's AI-native <em>and</em> compliance-grade from day one is the gap.
+              Two things converged: LLMs got cheap and good enough that a real conversational Q&amp;A layer over
+              internal documents is now a weekend-scale build rather than a research project, and financial
+              institutions are under increasing regulatory pressure to prove, not just claim, that mandatory training
+              was completed and hasn't been tampered with. A platform that's AI-native <em>and</em> compliance-grade
+              from day one is the gap.
             </p>
           </div>
         </div>
@@ -121,9 +133,9 @@
       <!-- ============ MARKET ANALYSIS ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2>Market Analysis</h2>
+          <h2 class="section-title">Market analysis</h2>
           <div class="cs-prose">
-            <p>The closest existing tools each solve one slice of this — none combine AI-native Q&amp;A with compliance-grade audit logging in one LOB-aware platform.</p>
+            <p>The closest existing tools each solve one slice of this. None combine AI-native Q&amp;A with compliance-grade audit logging in one LOB-aware platform.</p>
           </div>
 
           <div class="table-wrap">
@@ -170,17 +182,17 @@
       <!-- ============ SOLUTION & PRD ============ -->
       <section class="cs-section" id="prd">
         <div class="container">
-          <h2>Solution &amp; PRD</h2>
+          <h2 class="section-title">Solution &amp; PRD</h2>
           <div class="cs-prose">
             <p>Five core capabilities define the product, each mapped to one of the problems above:</p>
           </div>
 
           <ol class="numbered-list">
-            <li><strong>AI Knowledge Buddy</strong> — RAG-powered Q&amp;A grounded in a LOB's own documents, so answers cite an actual source instead of guessing.</li>
-            <li><strong>LOB-Specific Training Delivery</strong> — versioned modules with lessons and quizzes, scoped to the employee's line of business.</li>
-            <li><strong>Compliance Audit Logging</strong> — an append-only completion record enforced by a database trigger, not just an app-layer convention.</li>
-            <li><strong>Mentor Workflow</strong> — a structured 6-session collaboration checklist shared between mentor and mentee, with real progress tracking.</li>
-            <li><strong>Leader Dashboard</strong> — one view of completions, overdue items, and active mentor assignments across a people leader's whole team.</li>
+            <li><strong>AI Knowledge Buddy</strong>: RAG-powered Q&amp;A grounded in a LOB's own documents, so answers cite an actual source instead of guessing.</li>
+            <li><strong>LOB-Specific Training Delivery</strong>: versioned modules with lessons and quizzes, scoped to the employee's line of business.</li>
+            <li><strong>Compliance Audit Logging</strong>: an append-only completion record enforced by a database trigger, not just an app-layer convention.</li>
+            <li><strong>Mentor Workflow</strong>: a structured 6-session collaboration checklist shared between mentor and mentee, with real progress tracking.</li>
+            <li><strong>Leader Dashboard</strong>: one view of completions, overdue items, and active mentor assignments across a people leader's whole team.</li>
           </ol>
         </div>
       </section>
@@ -188,12 +200,12 @@
       <!-- ============ USER PERSONAS ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2>User Personas</h2>
+          <h2 class="section-title">User personas</h2>
 
           <div class="persona-grid">
             <div class="card persona-card">
               <span class="persona-card__name">Alex</span>
-              <span class="persona-card__role">26 · New Joinee, GIC Operations Analyst</span>
+              <span class="persona-card__role">26 &middot; New joinee, GIC Operations Analyst</span>
               <dl>
                 <div>
                   <dt>Goals</dt>
@@ -212,7 +224,7 @@
 
             <div class="card persona-card">
               <span class="persona-card__name">Michael</span>
-              <span class="persona-card__role">42 · People Leader, VP Operations</span>
+              <span class="persona-card__role">42 &middot; People leader, VP Operations</span>
               <dl>
                 <div>
                   <dt>Goals</dt>
@@ -231,7 +243,7 @@
 
             <div class="card persona-card">
               <span class="persona-card__name">Jennifer</span>
-              <span class="persona-card__role">38 · Compliance Admin, L&amp;D Manager</span>
+              <span class="persona-card__role">38 &middot; Compliance admin, L&amp;D Manager</span>
               <dl>
                 <div>
                   <dt>Goals</dt>
@@ -239,7 +251,7 @@
                 </div>
                 <div>
                   <dt>Pain points</dt>
-                  <dd>Editable completion records are a real audit risk — she needs records nobody can quietly alter.</dd>
+                  <dd>Editable completion records are a real audit risk; she needs records nobody can quietly alter.</dd>
                 </div>
                 <div>
                   <dt>Uses in CUE</dt>
@@ -254,29 +266,29 @@
       <!-- ============ MVP ROADMAP ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2>MVP Roadmap</h2>
+          <h2 class="section-title">MVP roadmap</h2>
 
           <div class="roadmap-grid">
             <div class="card roadmap-card">
-              <span class="tag tag-status">MVP1 · Weeks 1–8</span>
-              <h3 style="margin-top: 14px">Operational Foundation</h3>
+              <span class="tag tag-status">MVP1 &middot; Weeks 1-8</span>
+              <h3 style="margin-top: 14px">Operational foundation</h3>
               <ul>
                 <li>Auth, roles, and LOB structure</li>
-                <li>Training modules with lessons + quizzes</li>
+                <li>Training modules with lessons and quizzes</li>
                 <li>Mentor collaboration checklist (6 sessions)</li>
-                <li>Leader dashboard + completion tracking</li>
-                <li>Immutable compliance audit log + CSV export</li>
+                <li>Leader dashboard and completion tracking</li>
+                <li>Immutable compliance audit log and CSV export</li>
                 <li>Knowledge map admin (structured tribal knowledge)</li>
               </ul>
             </div>
             <div class="card roadmap-card">
-              <span class="tag tag-status is-progress">MVP2 · Weeks 9–12</span>
-              <h3 style="margin-top: 14px">Intelligence + Compliance Layer</h3>
+              <span class="tag tag-status is-progress">MVP2 &middot; Weeks 9-12</span>
+              <h3 style="margin-top: 14px">Intelligence and compliance layer</h3>
               <ul>
-                <li>Real Claude API integration (replacing the mock RAG layer)</li>
+                <li>Real Claude API integration, replacing the mock RAG layer</li>
                 <li>Document ingestion pipeline for uploaded LOB SOPs</li>
                 <li>Module version history and re-certification flows</li>
-                <li>Demo mode for portfolio / stakeholder walkthroughs</li>
+                <li>Demo mode for portfolio and stakeholder walkthroughs</li>
                 <li>Cost monitoring on live Claude usage</li>
               </ul>
             </div>
@@ -293,34 +305,34 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Core schema + auth</td>
+                  <td>Core schema and auth</td>
                   <td>MVP1</td>
-                  <td>✅ Complete</td>
+                  <td>Complete</td>
                 </tr>
                 <tr>
-                  <td>Training + mentor workflow</td>
+                  <td>Training and mentor workflow</td>
                   <td>MVP1</td>
-                  <td>✅ Complete</td>
+                  <td>Complete</td>
                 </tr>
                 <tr>
                   <td>Immutable audit log</td>
                   <td>MVP1</td>
-                  <td>✅ Complete</td>
+                  <td>Complete</td>
                 </tr>
                 <tr>
-                  <td>Knowledge map + mock AI chat</td>
+                  <td>Knowledge map and mock AI chat</td>
                   <td>MVP1</td>
-                  <td>✅ Complete</td>
+                  <td>Complete</td>
                 </tr>
                 <tr>
                   <td>Portfolio demo mode</td>
                   <td>MVP2</td>
-                  <td>✅ Complete</td>
+                  <td>Complete</td>
                 </tr>
                 <tr>
                   <td>Live Claude API integration</td>
                   <td>MVP2</td>
-                  <td>🔄 In progress</td>
+                  <td>In progress</td>
                 </tr>
               </tbody>
             </table>
@@ -331,7 +343,7 @@
       <!-- ============ TECHNICAL ARCHITECTURE ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2>Technical Architecture</h2>
+          <h2 class="section-title">Technical architecture</h2>
 
           <div class="arch-grid">
             <div class="card arch-card">
@@ -344,7 +356,7 @@
             </div>
             <div class="card arch-card">
               <span class="arch-card__label">Database</span>
-              <p>PostgreSQL, with migration-based schema history and a database-level trigger enforcing immutability on completion records — not just an app-layer rule.</p>
+              <p>PostgreSQL, with migration-based schema history and a database-level trigger enforcing immutability on completion records, not just an app-layer rule.</p>
             </div>
             <div class="card arch-card">
               <span class="arch-card__label">AI</span>
@@ -357,7 +369,7 @@
       <!-- ============ AI STRATEGY ============ -->
       <section class="cs-section" id="ai-strategy">
         <div class="container">
-          <h2>AI Strategy</h2>
+          <h2 class="section-title">AI strategy</h2>
           <div class="cs-prose">
             <p>How the Knowledge Buddy actually works, end to end:</p>
           </div>
@@ -365,30 +377,30 @@
           <div class="rag-steps">
             <div class="card">1. Documents are uploaded per line-of-business and chunked into searchable sections.</div>
             <div class="card">2. An incoming question is scored against those chunks (and the knowledge map) for relevance.</div>
-            <div class="card">3. The top-matching chunk becomes grounding context — the thing the answer actually has to be true to.</div>
+            <div class="card">3. The top-matching chunk becomes grounding context: the thing the answer actually has to be true to.</div>
             <div class="card">4. Claude answers using that context, with the source cited back to the user, not invented from general knowledge.</div>
           </div>
 
           <h3>System prompt design (MVP2)</h3>
           <div class="cs-prose">
             <p>
-              MVP1 ships this retrieval step wired to a deterministic keyword-matching mock instead of a live model call —
-              intentionally, so the retrieval architecture could be validated end-to-end before spending on API calls. The
-              system prompt below is the one designed for the MVP2 swap-in:
+              MVP1 ships this retrieval step wired to a deterministic keyword-matching mock instead of a live model
+              call, intentionally, so the retrieval architecture could be validated end-to-end before spending on API
+              calls. The system prompt below is the one designed for the MVP2 swap-in:
             </p>
           </div>
           <div class="code-block">
-            <span class="code-block__label">system prompt — knowledge buddy (MVP2)</span>
+            <span class="code-block__label">system prompt - knowledge buddy (MVP2)</span>
             <pre><span class="tok-com">You are CUE's Knowledge Buddy, an onboarding assistant for {lobName}.</span>
 
 <span class="tok-kw">Rules:</span>
 - Answer <span class="tok-str">only</span> from the CONTEXT provided below. Never invent a policy,
   a contact name, or an approval chain that isn't in the context.
 - If the context doesn't answer the question, say so plainly and suggest
-  what the employee should ask instead — don't guess.
+  what the employee should ask instead, don't guess.
 - When context comes from a document, cite the file name and section.
 - When context comes from the knowledge map, name the go-to contact and
-  approver exactly as given — don't paraphrase a person's title.
+  approver exactly as given, don't paraphrase a person's title.
 - Keep answers short. This is a chat assistant for someone mid-task,
   not a document generator.
 
@@ -402,19 +414,19 @@
           <h3 style="margin-top: 40px">Three answer types</h3>
           <div class="answer-types">
             <div class="card answer-type">
-              <span class="answer-type__num">TYPE 1</span>
+              <span class="answer-type__num">Type 1</span>
               <h4>Document Q&amp;A</h4>
               <p>Answers grounded in an uploaded LOB document, with the source file and section cited alongside the answer.</p>
             </div>
             <div class="card answer-type">
-              <span class="answer-type__num">TYPE 2</span>
-              <h4>Knowledge Map Lookup</h4>
-              <p>"Who approves X" or "who do I contact for Y" — resolved from the structured knowledge map, not free text.</p>
+              <span class="answer-type__num">Type 2</span>
+              <h4>Knowledge map lookup</h4>
+              <p>"Who approves X" or "who do I contact for Y", resolved from the structured knowledge map, not free text.</p>
             </div>
             <div class="card answer-type">
-              <span class="answer-type__num">TYPE 3</span>
-              <h4>Course Tutoring</h4>
-              <p>Stuck on a quiz question — the assistant points back to the exact lesson content instead of just giving the answer.</p>
+              <span class="answer-type__num">Type 3</span>
+              <h4>Course tutoring</h4>
+              <p>Stuck on a quiz question: the assistant points back to the exact lesson content instead of just giving the answer.</p>
             </div>
           </div>
 
@@ -449,7 +461,7 @@
       <!-- ============ WHAT I BUILT ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2>What I Built</h2>
+          <h2 class="section-title">What I built</h2>
           <div class="cs-prose">
             <p>A few of the more deliberate decisions, with the actual code behind them:</p>
           </div>
@@ -457,14 +469,14 @@
           <h3>Immutable audit log trigger (SQL)</h3>
           <div class="cs-prose">
             <p>
-              Compliance completion records can't be "probably" immutable — an app-layer rule is one bug away from a
+              Compliance completion records can't be "probably" immutable; an app-layer rule is one bug away from a
               regulator finding an edited row. This is enforced at the database level: any <code>UPDATE</code> or
-              <code>DELETE</code> on <code>completion_records</code> is rejected by Postgres itself, before it ever reaches
-              the application.
+              <code>DELETE</code> on <code>completion_records</code> is rejected by Postgres itself, before it ever
+              reaches the application.
             </p>
           </div>
           <div class="code-block">
-            <span class="code-block__label">migration — completion_immutability trigger</span>
+            <span class="code-block__label">migration - completion_immutability trigger</span>
             <pre><span class="tok-kw">CREATE OR REPLACE FUNCTION</span> <span class="tok-fn">prevent_completion_modification</span>()
 <span class="tok-kw">RETURNS TRIGGER AS</span> $$
 <span class="tok-kw">BEGIN</span>
@@ -480,13 +492,14 @@ $$ <span class="tok-kw">LANGUAGE plpgsql</span>;
           <h3 style="margin-top: 40px">RAG retrieval function (TypeScript)</h3>
           <div class="cs-prose">
             <p>
-              The retrieval layer is written to the same interface a real vector-similarity search would expose — so
-              swapping keyword-overlap scoring for real embeddings later is a drop-in change, not a rewrite of every caller.
+              The retrieval layer is written to the same interface a real vector-similarity search would expose, so
+              swapping keyword-overlap scoring for real embeddings later is a drop-in change, not a rewrite of every
+              caller.
             </p>
           </div>
           <div class="code-block">
             <span class="code-block__label">retrievalService.ts</span>
-            <pre><span class="tok-com">/** Stand-in for real vector search — same interface a real</span>
+            <pre><span class="tok-com">/** Stand-in for real vector search, same interface a real</span>
 <span class="tok-com"> *  semantic search would expose, so callers don't change later. */</span>
 <span class="tok-kw">export async function</span> <span class="tok-fn">searchChunks</span>(lobId: <span class="tok-kw">string</span>, query: <span class="tok-kw">string</span>, limit = <span class="tok-str">5</span>) {
   <span class="tok-kw">const</span> terms = query.match(/[\p{L}\p{N}']+/gu) ?? [];
@@ -501,22 +514,22 @@ $$ <span class="tok-kw">LANGUAGE plpgsql</span>;
 }</pre>
           </div>
 
-          <p class="text-small" style="margin-top: 24px">Full source: <a href="https://github.com/saibala98/cue-platform" target="_blank" rel="noreferrer" style="color: var(--gold)">github.com/saibala98/cue-platform</a></p>
+          <p class="text-small" style="margin-top: 24px">Full source: <a href="https://github.com/saibala98/cue-platform" target="_blank" rel="noreferrer" style="color: var(--primary)">github.com/saibala98/cue-platform</a></p>
         </div>
       </section>
 
       <!-- ============ LESSONS LEARNED ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2>Lessons Learned</h2>
+          <h2 class="section-title">Lessons learned</h2>
           <div class="lessons-grid">
             <div class="card">
               <h4>Ship the retrieval architecture before the model call</h4>
-              <p>Building the mock RAG layer first — same interface, no live API — let me validate the whole product loop (chunking, scoring, citation) without spending on tokens or waiting on rate limits.</p>
+              <p>Building the mock RAG layer first, same interface, no live API, let me validate the whole product loop (chunking, scoring, citation) without spending on tokens or waiting on rate limits.</p>
             </div>
             <div class="card">
               <h4>Compliance requirements shape the schema, not just the UI</h4>
-              <p>"Make the audit log immutable" isn't a frontend feature — it changed how I designed the database migration from the very first pass.</p>
+              <p>"Make the audit log immutable" isn't a frontend feature; it changed how I designed the database migration from the very first pass.</p>
             </div>
             <div class="card">
               <h4>A demo mode is a product decision, not an afterthought</h4>
@@ -524,7 +537,7 @@ $$ <span class="tok-kw">LANGUAGE plpgsql</span>;
             </div>
             <div class="card">
               <h4>Personas keep scope honest</h4>
-              <p>Every feature I built maps back to something Alex, Michael, or Jennifer specifically needed — that discipline is what kept a 9-entity platform from sprawling into a features junk drawer.</p>
+              <p>Every feature I built maps back to something Alex, Michael, or Jennifer specifically needed; that discipline is what kept a 9-entity platform from sprawling into a features junk drawer.</p>
             </div>
           </div>
         </div>
@@ -533,9 +546,9 @@ $$ <span class="tok-kw">LANGUAGE plpgsql</span>;
       <!-- ============ WHAT'S NEXT ============ -->
       <section class="cs-section">
         <div class="container">
-          <h2>What's Next</h2>
+          <h2 class="section-title">What's next</h2>
           <ol class="numbered-list">
-            <li>Wire the live Claude API in behind the existing retrieval interface — no changes needed above the service layer.</li>
+            <li>Wire the live Claude API in behind the existing retrieval interface, no changes needed above the service layer.</li>
             <li>Real document ingestion (PDF/DOCX parsing) instead of pre-chunked seed content.</li>
             <li>Usage-based cost monitoring dashboard for compliance admins running live Claude traffic.</li>
             <li>Pilot with a real financial-services LOB team to validate the knowledge map against actual tribal knowledge.</li>
@@ -544,14 +557,21 @@ $$ <span class="tok-kw">LANGUAGE plpgsql</span>;
       </section>
     </main>
 
-    <!-- ============ FOOTER ============ -->
-    <footer class="cs-footer">
+    <!-- ============ FOOTER BAND ============ -->
+    <footer class="footer-band">
       <div class="container">
-        <p class="text-small">SAI SAIPRASAD · AI Product Manager</p>
-        <div class="cs-footer__links">
-          <a href="index.html">Back to Portfolio</a>
-          <a href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="https://github.com/saibala98" target="_blank" rel="noreferrer">GitHub</a>
+        <h2 class="section-title" style="margin-bottom: 0">AI PM roles in financial services and tech.</h2>
+        <p class="footer-band__sub">
+          I'm looking at AI PM positions where product thinking and technical depth both matter. If that's you,
+          let's talk.
+        </p>
+        <div class="footer-band__actions">
+          <a href="index.html#contact" class="btn btn-primary">Let's talk &#8594;</a>
+          <a href="index.html" class="btn btn-ghost">Back to portfolio</a>
+        </div>
+        <div class="footer-bottom">
+          <span>Sai Saiprasad &middot; 2026</span>
+          <span>Currently open to PM roles</span>
         </div>
       </div>
     </footer>
