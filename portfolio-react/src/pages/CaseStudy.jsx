@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Nav from '../components/Nav.jsx';
 import Footer from '../components/Footer.jsx';
+import usePageMeta from '../usePageMeta.js';
 import {
   cardHover,
   fadeUpItem,
@@ -108,6 +109,14 @@ const NEXT_ITEMS = [
 const heroContainer = staggerContainer(0.1, 0.1);
 
 export default function CaseStudy() {
+  usePageMeta({
+    title: 'CUE Case Study - Sai Saiprasad, AI Product Manager',
+    description:
+      'Full case study: how CUE, an AI onboarding platform for financial services, went from problem discovery to a working MVP.',
+    ogTitle: 'CUE Case Study - Sai Saiprasad',
+    ogType: 'article',
+  });
+
   return (
     <>
       <Nav home={false} />
