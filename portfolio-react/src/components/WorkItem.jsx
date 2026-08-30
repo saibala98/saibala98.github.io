@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { useRef } from 'react';
 import { EASE } from '../motion.js';
 
 // Single accordion row for the Work section. Open/close state is owned by
@@ -9,6 +10,23 @@ import { EASE } from '../motion.js';
 export default function WorkItem({ title, subtitle, tags, year, status, statusBadges, isOpen, onToggle, children }) {
   const badges =
     statusBadges ?? (status ? [{ label: status, tone: status === 'Complete' ? 'complete' : 'progress' }] : []);
+
+  const bodyRef = useRef(null);
+
+  // iOS Safari can leave this content fully in the DOM but unpainted after
+  // the height:0 -> 'auto' expand finishes inside an overflow:hidden box -
+  // confirmed by the fact that pinch-zooming (which forces a full repaint)
+  // makes it reappear. Nudging a sub-pixel scale and back forces the same
+  // kind of repaint programmatically, right when the expand animation ends,
+  // instead of requiring the user to zoom manually.
+  const forceRepaint = () => {
+    const el = bodyRef.current;
+    if (!el) return;
+    el.style.webkitTransform = 'scale(0.9999)';
+    requestAnimationFrame(() => {
+      el.style.webkitTransform = 'scale(1)';
+    });
+  };
 
   return (
     <div className="work-item">
@@ -54,14 +72,7 @@ export default function WorkItem({ title, subtitle, tags, year, status, statusBa
               height: { duration: 0.35, ease: EASE },
               opacity: { duration: 0.25 },
             }}
-            // Forces this box onto its own GPU compositing layer. Mobile
-            // Safari has a known bug where content inside an
-            // overflow:hidden box that was just animated from height:0 to
-            // height:'auto' can go stale - fully present in the DOM, just
-            // never repainted - until something (pinch-zoom, rotation)
-            // forces a full repaint. translateZ(0)/backface-visibility
-            // give WebKit a stable layer to paint into instead of
-            // dropping/never-repainting the content after the animation.
+            onAnimationComplete={forceRepaint}
             style={{
               overflow: 'hidden',
               transform: 'translateZ(0)',
@@ -69,7 +80,9 @@ export default function WorkItem({ title, subtitle, tags, year, status, statusBa
               WebkitBackfaceVisibility: 'hidden',
             }}
           >
-            <div className="work-item__body">{children}</div>
+            <div className="work-item__body" ref={bodyRef}>
+              {children}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
