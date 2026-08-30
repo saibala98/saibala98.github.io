@@ -54,7 +54,20 @@ export default function WorkItem({ title, subtitle, tags, year, status, statusBa
               height: { duration: 0.35, ease: EASE },
               opacity: { duration: 0.25 },
             }}
-            style={{ overflow: 'hidden' }}
+            // Forces this box onto its own GPU compositing layer. Mobile
+            // Safari has a known bug where content inside an
+            // overflow:hidden box that was just animated from height:0 to
+            // height:'auto' can go stale - fully present in the DOM, just
+            // never repainted - until something (pinch-zoom, rotation)
+            // forces a full repaint. translateZ(0)/backface-visibility
+            // give WebKit a stable layer to paint into instead of
+            // dropping/never-repainting the content after the animation.
+            style={{
+              overflow: 'hidden',
+              transform: 'translateZ(0)',
+              WebkitTransform: 'translateZ(0)',
+              WebkitBackfaceVisibility: 'hidden',
+            }}
           >
             <div className="work-item__body">{children}</div>
           </motion.div>
