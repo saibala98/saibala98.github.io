@@ -126,7 +126,7 @@ export default function Nav({ home = true }) {
               Open to work
             </span>
           )}
-          <a href={linkHref('contact')} className="btn btn-primary btn-small">
+          <a href={linkHref('contact-open')} className="btn btn-primary btn-small">
             Let&apos;s talk &rarr;
           </a>
         </div>

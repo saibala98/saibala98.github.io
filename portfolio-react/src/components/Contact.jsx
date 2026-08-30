@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { EASE, fadeUpItem, sectionReveal, staggerContainer, viewportRepeat } from '../motion.js';
+import { GitHubIcon, LinkedInIcon } from '../icons.jsx';
 
 const PERSONAL_EMAIL = 'sai98bala@gmail.com';
 const SCHOOL_EMAIL = 'saiprasa@yorku.ca';
@@ -48,6 +49,27 @@ export default function Contact() {
     setIsOpen(true);
     setStatus('idle');
   };
+
+  // The Nav/Footer "Let's talk" CTAs link to #contact-open (rather than
+  // plain #contact) so they can both scroll here AND expand the form. A
+  // real anchor id="contact-open" doesn't exist, so the browser won't
+  // auto-scroll for it - handled manually below, which also covers the
+  // cross-page case (case-study page navigating to /#contact-open, where
+  // this component isn't mounted until after the navigation completes).
+  useEffect(() => {
+    const openFromHash = () => {
+      if (window.location.hash !== '#contact-open') return;
+      setIsOpen(true);
+      setStatus('idle');
+      history.replaceState(null, '', '#contact');
+      requestAnimationFrame(() => {
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    };
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+    return () => window.removeEventListener('hashchange', openFromHash);
+  }, []);
 
   const closeForm = () => {
     setIsOpen(false);
@@ -124,10 +146,10 @@ export default function Contact() {
 
             <div className="contact-rows">
               <a href="https://www.linkedin.com/in/sai-b-saiprasad" target="_blank" rel="noopener noreferrer">
-                LinkedIn
+                <LinkedInIcon /> LinkedIn
               </a>
               <a href="https://github.com/saibala98" target="_blank" rel="noopener noreferrer">
-                GitHub
+                <GitHubIcon /> GitHub
               </a>
             </div>
           </>

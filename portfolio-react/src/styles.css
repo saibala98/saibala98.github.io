@@ -1321,7 +1321,9 @@ html.custom-cursor-active * {
 }
 .contact-rows a {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font: 400 0.875rem var(--font-body);
   color: var(--muted);
   transition: color 0.15s ease;

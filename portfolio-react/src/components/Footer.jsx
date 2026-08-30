@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { LinkedInIcon } from '../icons.jsx';
 
 // `home` mirrors the real difference between the two static footers: on
 // index.html the ghost button is "View LinkedIn"; on case-study-cue.html
@@ -16,7 +17,7 @@ export default function Footer({ home = true }) {
           that&apos;s you, let&apos;s talk.
         </p>
         <div className="footer-band__actions">
-          <a href={home ? '#contact' : '/#contact'} className="btn btn-primary">
+          <a href={home ? '#contact-open' : '/#contact-open'} className="btn btn-primary">
             Let&apos;s talk &rarr;
           </a>
           {home ? (
@@ -26,7 +27,7 @@ export default function Footer({ home = true }) {
               rel="noopener noreferrer"
               className="btn btn-ghost"
             >
-              View LinkedIn
+              <LinkedInIcon /> View LinkedIn
             </a>
           ) : (
             <Link to="/" className="btn btn-ghost">
