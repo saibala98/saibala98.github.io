@@ -39,8 +39,18 @@ function ComingSoonButton({ variant, children }) {
 function CueWorkContent() {
   const viewportRef = useRef(null);
   const frameRef = useRef(null);
+  // Click-to-load: the iframe only mounts once the visitor asks for it,
+  // never eagerly the moment the accordion opens. It was previously mounted
+  // immediately, sitting inside a CSS transform: scale() box right as the
+  // accordion's own height-animation reflow happened - on iOS Safari this
+  // reliably left the whole surrounding content unpainted (visible only
+  // while pinch-zooming, which forces a full repaint; nothing else did).
+  // This also restores this project's original design intent (see the
+  // repo README) of the demo being click-to-load rather than always-on.
+  const [demoLoaded, setDemoLoaded] = useState(false);
 
   useEffect(() => {
+    if (!demoLoaded) return undefined;
     const viewport = viewportRef.current;
     const frame = frameRef.current;
     if (!viewport || !frame) return undefined;
@@ -55,7 +65,7 @@ function CueWorkContent() {
     const observer = new ResizeObserver(resize);
     observer.observe(viewport);
     return () => observer.disconnect();
-  }, []);
+  }, [demoLoaded]);
 
   return (
     <>
@@ -131,12 +141,18 @@ function CueWorkContent() {
 
       <div className="cue-demo">
         <div className="cue-demo-viewport" ref={viewportRef}>
-          <iframe
-            ref={frameRef}
-            className="cue-demo__frame"
-            src="/demo/app.html"
-            title="Live preview of the CUE platform"
-          ></iframe>
+          {demoLoaded ? (
+            <iframe
+              ref={frameRef}
+              className="cue-demo__frame"
+              src="/demo/app.html"
+              title="Live preview of the CUE platform"
+            ></iframe>
+          ) : (
+            <button type="button" className="cue-demo__load" onClick={() => setDemoLoaded(true)}>
+              Try Interactive Demo &rarr;
+            </button>
+          )}
         </div>
         <a className="cue-demo__badge" href="/demo/app.html" target="_blank" rel="noreferrer">
           Try live demo &rarr;
