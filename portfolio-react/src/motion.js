@@ -14,9 +14,19 @@ export const EASE = [0.16, 1, 0.3, 1];
 export const viewportOnce = { once: true, amount: 0.2 };
 
 // Scroll reveals that should replay both scrolling down AND scrolling back
-// up (most section-level content). `margin` starts the trigger slightly
-// before the element enters the viewport so the reveal doesn't feel late.
-export const viewportRepeat = { once: false, amount: 0.2, margin: '-80px' };
+// up (most section-level content).
+//
+// Previously also had `amount: 0.2` and a `margin: '-80px'` shrink on the
+// trigger area. That combination reliably broke on mobile Safari for tall
+// sections (About in particular): the toolbar collapsing/expanding as you
+// scroll resizes the visual viewport out from under IntersectionObserver,
+// and a fixed 20%-of-target visibility threshold could then just never be
+// satisfied - leaving the whole section permanently stuck at its hidden
+// (opacity: 0) state, with no error, on load, independent of anything
+// else on the page. `amount: 'some'` fires as soon as any part of the
+// element is visible at all, which is far more forgiving and avoids that
+// failure mode entirely.
+export const viewportRepeat = { once: false, amount: 'some' };
 
 // Wraps a whole section: fade + slide up as it enters the viewport.
 export const sectionReveal = {
