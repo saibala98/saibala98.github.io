@@ -60,7 +60,7 @@
   --space-xl: 24px;
   --space-xxl: 32px;
   --space-huge: 64px;
-  --space-section: 96px;
+  --space-section: 48px;
 
   --radius: 12px;
   --radius-sm: 8px;
@@ -653,7 +653,7 @@ html.custom-cursor-active * {
    ========================================================= */
 
 .hero {
-  padding: 96px 0;
+  padding: 96px 0 48px;
   position: relative;
   background:
     radial-gradient(ellipse 70% 55% at 15% -15%, rgba(83, 58, 253, 0.06) 0%, transparent 60%),
@@ -846,6 +846,29 @@ html.custom-cursor-active * {
    SECTION SHELL
    ========================================================= */
 
+.section-transition {
+  position: relative;
+}
+
+/* Decorative wavy divider along a section's bottom edge - see
+   SectionTransition.jsx / SectionWave.jsx. */
+.section-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 14px;
+  line-height: 0;
+  color: var(--hairline);
+  overflow: hidden;
+  pointer-events: none;
+}
+.section-wave svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .section {
   padding: var(--space-section) 0;
 }
@@ -997,6 +1020,74 @@ html.custom-cursor-active * {
 /* =========================================================
    WORK SECTION (accordion)
    ========================================================= */
+
+/* Real content sits above the ambient background layer below. Clips the
+   oversized shine band to the section bounds (scoped to #work only, not
+   the shared .section-transition class other sections also use). */
+#work {
+  overflow: hidden;
+}
+#work > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ambient "code compiling" texture - see WorkBackground.jsx (Framer Motion
+   drives the scroll loop; this just lays the columns out). Kept to a low,
+   fixed opacity rather than anything content-competing. */
+.work-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.12;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.8;
+  white-space: nowrap;
+}
+.work-bg__col {
+  position: absolute;
+  top: 0;
+  width: 240px;
+}
+.work-bg__line {
+  padding: 2px 0;
+}
+.work-bg-shine {
+  position: absolute;
+  top: -20%;
+  left: -60%;
+  width: 60%;
+  height: 140%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%);
+  mix-blend-mode: overlay;
+}
+@media (max-width: 768px) {
+  .work-bg-shine {
+    display: none;
+  }
+}
+@media (max-width: 1100px) {
+  .work-bg__col:nth-child(4),
+  .work-bg__col:nth-child(5) {
+    display: none;
+  }
+}
+/* Lighter version on phones: a single column, no glare sweep (that layer
+   stays hidden via the .work-bg-shine rule above), so the effect is barely
+   more than a whisper of texture rather than the full desktop density. */
+@media (max-width: 768px) {
+  .work-bg__col:nth-child(2),
+  .work-bg__col:nth-child(3) {
+    display: none;
+  }
+}
 
 .work-list {
   margin-top: 40px;
@@ -1258,6 +1349,102 @@ html.custom-cursor-active * {
 }
 .about-building-card__link:hover {
   color: var(--primary-hover);
+}
+
+/* =========================================================
+   SKILLS BANNER (conveyor belt of tech-stack chips)
+   ========================================================= */
+
+.skills-banner-section {
+  padding: 0;
+}
+.skills-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 14px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--primary);
+}
+.skills-banner__fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.skills-banner__fade--left {
+  left: 0;
+  background: linear-gradient(to right, var(--primary), transparent);
+}
+.skills-banner__fade--right {
+  right: 0;
+  background: linear-gradient(to left, var(--primary), transparent);
+}
+.skills-banner__track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: skills-conveyor 40s linear infinite;
+}
+@keyframes skills-conveyor {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skills-banner__track {
+    animation: none !important;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .skills-banner__track::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.skill-chip {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  min-width: 76px;
+  flex-shrink: 0;
+  cursor: default;
+  user-select: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.skill-chip:hover {
+  border-color: var(--chip-brand);
+  box-shadow: 0 4px 12px rgba(13, 37, 61, 0.14);
+}
+.skill-chip__icon {
+  width: 22px;
+  height: 22px;
+  color: var(--chip-brand);
+}
+.skill-chip__label {
+  font: 400 0.6875rem var(--font-mono);
+  color: var(--muted);
+  text-align: center;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.skill-chip:hover .skill-chip__label {
+  color: var(--ink);
 }
 
 /* =========================================================
@@ -1925,10 +2112,10 @@ tbody tr.is-highlight td {
     padding: 0 20px;
   }
   .section {
-    padding: 64px 0;
+    padding: 36px 0;
   }
   .hero {
-    padding: 120px 0 56px;
+    padding: 120px 0 32px;
   }
   .about-stats,
   .capability-grid,

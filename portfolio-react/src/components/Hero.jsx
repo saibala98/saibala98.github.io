@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import useTypewriter from '../useTypewriter.js';
 import { EASE, fadeUpItem, slotItem, staggerContainer } from '../motion.js';
+import SectionWave from './SectionWave.jsx';
 
 // Max rotation in either axis, degrees.
 const MAX_TILT = 14;
@@ -217,9 +218,6 @@ export default function Hero() {
               <a href="#work" className="btn btn-primary">
                 View my work &rarr;
               </a>
-              <a href="/resume.pdf" className="btn btn-ghost">
-                Download resume
-              </a>
             </motion.div>
           </motion.div>
 
@@ -227,17 +225,8 @@ export default function Hero() {
             <HeroPhoto />
           </div>
         </div>
+        <SectionWave />
       </section>
-
-      <div className="trust-bar">
-        <div className="container">
-          <div className="trust-strip">
-            <span className="tnum">4+ yrs &middot; CIBC/TCS</span>
-            <span>MMAI &middot; Schulich</span>
-            <span>KW, ON</span>
-          </div>
-        </div>
-      </div>
     </>
   );
 }

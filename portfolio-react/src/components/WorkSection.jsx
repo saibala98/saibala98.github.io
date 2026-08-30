@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import WorkItem from './WorkItem.jsx';
-import { cardHover, fadeUpItem, sectionReveal, staggerContainer, viewportRepeat } from '../motion.js';
+import { cardHover, fadeUpItem, staggerContainer } from '../motion.js';
+import SectionTransition from './SectionTransition.jsx';
+import WorkBackground from './WorkBackground.jsx';
 
 // Content revealed by expanding the accordion (not by scrolling) should
 // animate in on mount, not via whileInView - it mounts inside an
@@ -218,14 +220,8 @@ export default function WorkSection() {
   const toggle = (key) => setOpenItem((current) => (current === key ? null : key));
 
   return (
-    <motion.section
-      className="section section--warm"
-      id="work"
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewportRepeat}
-      variants={sectionReveal}
-    >
+    <SectionTransition className="section section--warm" id="work" ariaLabel="Work">
+      <WorkBackground />
       <div className="container">
         <div>
           <p className="eyebrow eyebrow--gold">Work</p>
@@ -261,6 +257,6 @@ export default function WorkSection() {
           </WorkItem>
         </div>
       </div>
-    </motion.section>
+    </SectionTransition>
   );
 }

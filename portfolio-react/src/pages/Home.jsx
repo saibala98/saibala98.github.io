@@ -2,6 +2,7 @@ import Nav from '../components/Nav.jsx';
 import Hero from '../components/Hero.jsx';
 import WorkSection from '../components/WorkSection.jsx';
 import About from '../components/About.jsx';
+import SkillsBanner from '../components/SkillsBanner.jsx';
 import Skills from '../components/Skills.jsx';
 import Contact from '../components/Contact.jsx';
 import Footer from '../components/Footer.jsx';
@@ -26,6 +27,7 @@ export default function Home() {
         <Hero />
         <WorkSection />
         <About />
+        <SkillsBanner />
         <Skills />
         <Contact />
       </main>

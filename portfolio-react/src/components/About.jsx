@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { popItem, sectionReveal, staggerContainer, viewportRepeat } from '../motion.js';
+import { popItem, staggerContainer, viewportRepeat } from '../motion.js';
+import SectionTransition from './SectionTransition.jsx';
 
 const TIMELINE = [
   {
@@ -26,14 +27,7 @@ const ROLES = ['Product Manager', 'Product Analyst', 'Product Owner', 'Business 
 
 export default function About() {
   return (
-    <motion.section
-      className="section section--surface"
-      id="about"
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewportRepeat}
-      variants={sectionReveal}
-    >
+    <SectionTransition className="section section--surface" id="about" ariaLabel="About">
       <div className="container">
         <div className="about-intro">
           <p className="eyebrow eyebrow--gold">About</p>
@@ -111,6 +105,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </motion.section>
+    </SectionTransition>
   );
 }

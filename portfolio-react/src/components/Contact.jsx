@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import { EASE, fadeUpItem, sectionReveal, staggerContainer, viewportRepeat } from '../motion.js';
+import { EASE, fadeUpItem, staggerContainer } from '../motion.js';
 import { GitHubIcon, LinkedInIcon } from '../icons.jsx';
+import SectionTransition from './SectionTransition.jsx';
 
 const PERSONAL_EMAIL = 'sai98bala@gmail.com';
 const SCHOOL_EMAIL = 'saiprasa@yorku.ca';
@@ -121,14 +122,7 @@ export default function Contact() {
   };
 
   return (
-    <motion.section
-      className="section contact"
-      id="contact"
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewportRepeat}
-      variants={sectionReveal}
-    >
+    <SectionTransition className="section contact" id="contact" ariaLabel="Contact">
       <div className="container">
         <div>
           <p className="eyebrow eyebrow--gold">Contact</p>
@@ -280,6 +274,6 @@ export default function Contact() {
 
         <p className="contact__location">Kitchener, ON 🇨🇦 &middot; Remote or hybrid across Canada</p>
       </div>
-    </motion.section>
+    </SectionTransition>
   );
 }

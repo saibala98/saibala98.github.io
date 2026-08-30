@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { fadeUpItem, popItem, sectionReveal, staggerContainer, viewportRepeat } from '../motion.js';
+import { fadeUpItem, popItem, staggerContainer } from '../motion.js';
+import SectionTransition from './SectionTransition.jsx';
 
 const CATEGORIES = [
   {
@@ -45,14 +46,7 @@ const CATEGORIES = [
 
 export default function Skills() {
   return (
-    <motion.section
-      className="section"
-      id="skills"
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewportRepeat}
-      variants={sectionReveal}
-    >
+    <SectionTransition className="section" id="skills" ariaLabel="Skills">
       <div className="container">
         <div>
           <h2 className="section-title">What I bring.</h2>
@@ -73,6 +67,6 @@ export default function Skills() {
           ))}
         </motion.div>
       </div>
-    </motion.section>
+    </SectionTransition>
   );
 }
