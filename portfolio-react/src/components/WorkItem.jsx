@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRef } from 'react';
 import { EASE } from '../motion.js';
 
 // Single accordion row for the Work section. Open/close state is owned by
@@ -7,26 +6,16 @@ import { EASE } from '../motion.js';
 //
 // Most items pass a single `status` string; CUE passes `statusBadges`
 // (an array of {label, tone}) to show its two MVP badges side by side.
+//
+// Deliberately NOT animating height:0 -> 'auto' here (an earlier version
+// did). That measurement trick is a known source of iOS Safari bugs -
+// content mounting during the reflow can end up with a badly-miscalculated
+// box height, leaving a large blank gap in the page that only "resolves"
+// much further down. A plain opacity/slide fade with no height animation
+// sidesteps the whole class of bug: the browser just reflows normally.
 export default function WorkItem({ title, subtitle, tags, year, status, statusBadges, isOpen, onToggle, children }) {
   const badges =
     statusBadges ?? (status ? [{ label: status, tone: status === 'Complete' ? 'complete' : 'progress' }] : []);
-
-  const bodyRef = useRef(null);
-
-  // iOS Safari can leave this content fully in the DOM but unpainted after
-  // the height:0 -> 'auto' expand finishes inside an overflow:hidden box -
-  // confirmed by the fact that pinch-zooming (which forces a full repaint)
-  // makes it reappear. Nudging a sub-pixel scale and back forces the same
-  // kind of repaint programmatically, right when the expand animation ends,
-  // instead of requiring the user to zoom manually.
-  const forceRepaint = () => {
-    const el = bodyRef.current;
-    if (!el) return;
-    el.style.webkitTransform = 'scale(0.9999)';
-    requestAnimationFrame(() => {
-      el.style.webkitTransform = 'scale(1)';
-    });
-  };
 
   return (
     <div className="work-item">
@@ -65,24 +54,13 @@ export default function WorkItem({ title, subtitle, tags, year, status, statusBa
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{
-              height: { duration: 0.35, ease: EASE },
-              opacity: { duration: 0.25 },
-            }}
-            onAnimationComplete={forceRepaint}
-            style={{
-              overflow: 'hidden',
-              transform: 'translateZ(0)',
-              WebkitTransform: 'translateZ(0)',
-              WebkitBackfaceVisibility: 'hidden',
-            }}
+            className="work-item__body"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: EASE }}
           >
-            <div className="work-item__body" ref={bodyRef}>
-              {children}
-            </div>
+            {children}
           </motion.div>
         )}
       </AnimatePresence>
