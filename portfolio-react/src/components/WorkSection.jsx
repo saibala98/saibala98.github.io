@@ -4,6 +4,15 @@ import { motion } from 'framer-motion';
 import WorkItem from './WorkItem.jsx';
 import { cardHover, fadeUpItem, sectionReveal, staggerContainer, viewportRepeat } from '../motion.js';
 
+// Content revealed by expanding the accordion (not by scrolling) should
+// animate in on mount, not via whileInView - it mounts inside an
+// AnimatePresence container whose height is still animating from 0, so
+// IntersectionObserver-based triggers can end up permanently "not
+// intersecting" (the element it's watching has ~zero size at the moment
+// it starts observing) and the content is left stuck at opacity 0 forever.
+// This showed up specifically on mobile taps, where there's no hover/resize
+// repaint to accidentally re-trigger the observer.
+
 const DEMO_DESIGN_WIDTH = 1280;
 
 // Static mono glyph bar (filled vs. empty blocks out of 10) rather than an
@@ -100,13 +109,7 @@ function CueWorkContent() {
           </dl>
         </div>
 
-        <motion.div
-          className="capability-grid"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportRepeat}
-          variants={staggerContainer(0.1)}
-        >
+        <motion.div className="capability-grid" initial="hidden" animate="visible" variants={staggerContainer(0.1)}>
           <motion.div className="card" variants={fadeUpItem} whileHover={cardHover}>
             <h4>AI Knowledge Buddy</h4>
             <p>RAG-powered Q&amp;A over company docs.</p>
