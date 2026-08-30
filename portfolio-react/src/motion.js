@@ -13,6 +13,11 @@ export const EASE = [0.16, 1, 0.3, 1];
 
 export const viewportOnce = { once: true, amount: 0.2 };
 
+// Scroll reveals that should replay both scrolling down AND scrolling back
+// up (most section-level content). `margin` starts the trigger slightly
+// before the element enters the viewport so the reveal doesn't feel late.
+export const viewportRepeat = { once: false, amount: 0.2, margin: '-80px' };
+
 // Wraps a whole section: fade + slide up as it enters the viewport.
 export const sectionReveal = {
   hidden: { opacity: 0, y: 24 },
@@ -42,6 +47,33 @@ export const slideLeftItem = {
 export const popItem = {
   hidden: { opacity: 0, scale: 0.85 },
   visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: EASE } },
+};
+
+// Slot-machine style reveal: slides in from above with a slight blur,
+// settling with a spring that has a touch of overshoot - like a reel
+// rolling to a stop rather than a plain fade-up. Text also flashes brand
+// purple while rolling and cools back to the normal muted reading color as
+// it settles - literal hex, not var(--primary)/var(--muted), since Framer
+// can't smoothly interpolate CSS custom properties as color values.
+//
+// Color gets its own slower, plain-tween "default" transition instead of
+// following the position spring: the spring settles in a few hundred ms,
+// which was too quick for the purple-to-muted fade to actually read as a
+// color change before the item had already fully landed.
+export const slotItem = {
+  hidden: { opacity: 0, y: -32, filter: 'blur(4px)', color: '#533afd', fontWeight: 700 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    color: '#64748d',
+    fontWeight: 400,
+    transition: {
+      default: { type: 'spring', stiffness: 300, damping: 18, mass: 0.6 },
+      color: { duration: 1.1, ease: 'easeOut' },
+      fontWeight: { duration: 1.1, ease: 'easeOut' },
+    },
+  },
 };
 
 export const cardHover = {

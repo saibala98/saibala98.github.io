@@ -68,7 +68,15 @@ export default function Nav({ home = true }) {
     >
       <nav className="nav" aria-label="Primary">
         <a href={home ? '#top' : '/#top'} className="nav__brand">
-          <span className="nav__brand-name">SAI SAIPRASAD</span>
+          <motion.img
+            src="/logo.svg"
+            alt="Sai B Saiprasad logo"
+            className="nav__brand-logo"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ duration: 0.2 }}
+          />
+          <span className="nav__brand-name">SAI B SAIPRASAD</span>
         </a>
 
         <button
@@ -87,7 +95,10 @@ export default function Nav({ home = true }) {
 
         <ul className={`nav__links${isOpen ? ' is-open' : ''}`} id="navLinks" ref={navLinksRef}>
           <li>
-            <a href={linkHref('cue')} data-nav={home || undefined} onClick={() => setIsOpen(false)}>
+            {/* CUE's content now lives inside the Work section's accordion
+                (id="work"), not its own #cue anchor - retargeted here so
+                this link isn't dead, without otherwise touching nav structure. */}
+            <a href={linkHref('work')} data-nav={home || undefined} onClick={() => setIsOpen(false)}>
               CUE
             </a>
           </li>

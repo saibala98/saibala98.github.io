@@ -1,0 +1,12 @@
+<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B0764"/>
+      <stop offset="55%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="160" height="160" rx="24" fill="url(#gradIcon)"/>
+  <text x="80" y="118" text-anchor="middle" font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="102" fill="#F5F3FF" letter-spacing="-2">S</text>
+  <circle cx="116" cy="36" r="11" fill="#F5F3FF"/>
+</svg>

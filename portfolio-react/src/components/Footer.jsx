@@ -9,10 +9,10 @@ export default function Footer({ home = true }) {
     <footer className="footer-band">
       <div className="container">
         <h2 className="section-title" style={{ marginBottom: 0 }}>
-          AI PM roles in financial services and tech.
+          Product roles in AI and financial services.
         </h2>
         <p className="footer-band__sub">
-          I&apos;m looking at AI PM positions where product thinking and technical depth both matter. If
+          I&apos;m looking at product positions where product thinking and technical depth both matter. If
           that&apos;s you, let&apos;s talk.
         </p>
         <div className="footer-band__actions">
@@ -21,9 +21,9 @@ export default function Footer({ home = true }) {
           </a>
           {home ? (
             <a
-              href="https://linkedin.com/in/[your-linkedin-handle]"
+              href="https://www.linkedin.com/in/sai-b-saiprasad"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="btn btn-ghost"
             >
               View LinkedIn
@@ -34,9 +34,13 @@ export default function Footer({ home = true }) {
             </Link>
           )}
         </div>
+        <div className="footer-band__emails">
+          <a href="mailto:sai98bala@gmail.com">Personal: sai98bala@gmail.com</a>
+          <a href="mailto:saiprasa@yorku.ca">School: saiprasa@yorku.ca</a>
+        </div>
         <div className="footer-bottom">
-          <span>Sai Saiprasad &middot; 2026</span>
-          <span>Currently open to PM roles</span>
+          <span>Sai B Saiprasad &middot; 2026</span>
+          <span>Currently open to product roles</span>
         </div>
       </div>
     </footer>

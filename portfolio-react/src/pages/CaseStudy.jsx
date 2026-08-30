@@ -110,10 +110,10 @@ const heroContainer = staggerContainer(0.1, 0.1);
 
 export default function CaseStudy() {
   usePageMeta({
-    title: 'CUE Case Study - Sai Saiprasad, AI Product Manager',
+    title: 'CUE Case Study - Sai B Saiprasad, Product & Strategy Professional',
     description:
       'Full case study: how CUE, an AI onboarding platform for financial services, went from problem discovery to a working MVP.',
-    ogTitle: 'CUE Case Study - Sai Saiprasad',
+    ogTitle: 'CUE Case Study - Sai B Saiprasad',
     ogType: 'article',
   });
 

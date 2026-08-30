@@ -20,7 +20,7 @@ export default function CandidateBrief() {
       >
         <motion.div className="brief-row" variants={slideLeftItem}>
           <dt>Name</dt>
-          <dd>Sai Saiprasad</dd>
+          <dd>Sai B Saiprasad</dd>
         </motion.div>
         <motion.div className="brief-row" variants={slideLeftItem}>
           <dt>Track</dt>

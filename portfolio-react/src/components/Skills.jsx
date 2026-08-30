@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { fadeUpItem, popItem, sectionReveal, staggerContainer, viewportOnce } from '../motion.js';
+import { fadeUpItem, popItem, sectionReveal, staggerContainer, viewportRepeat } from '../motion.js';
 
 const CATEGORIES = [
   {
@@ -50,7 +50,7 @@ export default function Skills() {
       id="skills"
       initial="hidden"
       whileInView="visible"
-      viewport={viewportOnce}
+      viewport={viewportRepeat}
       variants={sectionReveal}
     >
       <div className="container">
