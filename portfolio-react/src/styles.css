@@ -1473,15 +1473,13 @@ html.custom-cursor-active * {
 .skill-row__items {
   display: flex;
   flex-wrap: wrap;
+  margin-left: -14px;
 }
 .skill-row__items span {
   font-size: 0.875rem;
   color: var(--muted);
   padding: 2px 14px;
   border-right: 1px solid var(--hairline);
-}
-.skill-row__items span:first-child {
-  padding-left: 0;
 }
 .skill-row__items span:last-child {
   border-right: none;
