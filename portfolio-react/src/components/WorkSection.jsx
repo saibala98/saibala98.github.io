@@ -248,7 +248,7 @@ export default function WorkSection() {
             title="Smart Contribution Copilot"
             subtitle="AI-guided registered savings optimization - banking feature concept"
             tags={['React', 'AI/ML', 'Banking', 'UX Research', 'Fintech']}
-            year="2025"
+            year="2026"
             status="In Progress"
             isOpen={openItem === 'copilot'}
             onToggle={() => toggle('copilot')}
