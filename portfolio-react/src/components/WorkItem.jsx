@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { EASE } from '../motion.js';
 
 // Single accordion row for the Work section. Open/close state is owned by
@@ -14,6 +14,7 @@ import { EASE } from '../motion.js';
 // much further down. A plain opacity/slide fade with no height animation
 // sidesteps the whole class of bug: the browser just reflows normally.
 export default function WorkItem({ title, subtitle, tags, year, status, statusBadges, isOpen, onToggle, children }) {
+  const reduce = useReducedMotion();
   const badges =
     statusBadges ?? (status ? [{ label: status, tone: status === 'Complete' ? 'complete' : 'progress' }] : []);
 
@@ -42,8 +43,17 @@ export default function WorkItem({ title, subtitle, tags, year, status, statusBa
           </div>
           <motion.span
             className="work-item__chevron"
-            animate={{ rotate: isOpen ? 90 : 0 }}
-            transition={{ duration: 0.25, ease: EASE }}
+            animate={
+              reduce
+                ? { rotate: isOpen ? 90 : 0 }
+                : { rotate: isOpen ? 90 : 0, scale: isOpen ? 1 : [1, 1.14, 1] }
+            }
+            transition={{
+              rotate: { duration: 0.25, ease: EASE },
+              scale: isOpen
+                ? { duration: 0.25, ease: EASE }
+                : { duration: 1.7, repeat: Infinity, ease: 'easeInOut' },
+            }}
             aria-hidden="true"
           >
             &rarr;

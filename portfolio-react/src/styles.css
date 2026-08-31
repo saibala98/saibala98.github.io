@@ -1209,8 +1209,20 @@ html.custom-cursor-active * {
 }
 .work-item__chevron {
   display: inline-flex;
-  color: var(--muted);
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary);
+  background: rgba(83, 58, 253, 0.07);
+  color: var(--primary);
   font-size: 1rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.work-item__header:hover .work-item__chevron {
+  background: var(--primary);
+  color: #fff;
 }
 .work-item__body {
   padding: 4px 0 32px;

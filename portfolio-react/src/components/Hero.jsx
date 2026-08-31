@@ -69,6 +69,32 @@ const wordItem = {
 
 const ROLE_PHRASES = ['QA → Product → AI Product', 'Product & Strategy Professional'];
 
+// Scrolls to the Work section, then waits for the scroll to actually settle
+// (debounced on the 'scroll' event, since 'scrollend' isn't reliable across
+// browsers yet) before expanding the CUE item - so people landing on the
+// section see it's clickable instead of it happening while the section's
+// own height changes mid-scroll.
+function handleViewWork(e) {
+  const target = document.getElementById('work');
+  if (!target) return;
+  e.preventDefault();
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+
+  let settleTimer;
+  const onScroll = () => {
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(finish, 120);
+  };
+  function finish() {
+    window.removeEventListener('scroll', onScroll);
+    window.dispatchEvent(new CustomEvent('open-work-item', { detail: 'cue' }));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
 const WHAT_I_BRING = [
   '4+ years delivering banking software at CIBC',
   'AI product strategy from Schulich MMAI',
@@ -215,7 +241,7 @@ export default function Hero() {
             </ul>
 
             <motion.div className="hero__actions" variants={fadeUpItem}>
-              <a href="#work" className="btn btn-primary">
+              <a href="#work" className="btn btn-primary" onClick={handleViewWork}>
                 View my work &rarr;
               </a>
             </motion.div>

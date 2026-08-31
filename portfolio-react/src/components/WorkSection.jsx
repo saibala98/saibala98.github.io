@@ -219,6 +219,17 @@ export default function WorkSection() {
   const [openItem, setOpenItem] = useState(null);
   const toggle = (key) => setOpenItem((current) => (current === key ? null : key));
 
+  // "View my work" (Hero) waits for its smooth-scroll to settle, then fires
+  // this event so the CUE item expands as a separate step rather than
+  // fighting the in-flight scroll's changing layout.
+  useEffect(() => {
+    function handleOpenWorkItem(e) {
+      setOpenItem(e.detail);
+    }
+    window.addEventListener('open-work-item', handleOpenWorkItem);
+    return () => window.removeEventListener('open-work-item', handleOpenWorkItem);
+  }, []);
+
   return (
     <SectionTransition className="section section--warm" id="work" ariaLabel="Work">
       <WorkBackground />
