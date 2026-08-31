@@ -33,7 +33,7 @@ export default function About() {
           <p className="eyebrow eyebrow--gold">About</p>
           <h2 className="section-title">From quality to product.</h2>
           <p className="lead about-lead">
-            I&apos;ve spent 4 years embedded at CIBC through Tata Consultancy Services, working across the
+            I&apos;ve spent 4+ years embedded at CIBC through Tata Consultancy Services, working across the
             full lifecycle of core banking software - from test planning and automation to delivery
             coordination and stakeholder management. That foundation taught me how software actually ships
             inside a regulated financial institution: the constraints, the approvals, the cross-team

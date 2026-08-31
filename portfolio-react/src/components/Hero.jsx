@@ -70,7 +70,7 @@ const wordItem = {
 const ROLE_PHRASES = ['QA → Product → AI Product', 'Product & Strategy Professional'];
 
 const WHAT_I_BRING = [
-  '4 years delivering banking software at CIBC',
+  '4+ years delivering banking software at CIBC',
   'AI product strategy from Schulich MMAI',
   'Built CUE: a working AI onboarding platform',
   'QA → delivery → product: full software lifecycle',
@@ -203,7 +203,7 @@ export default function Hero() {
               </span>
             </motion.p>
             <motion.p className="hero__thesis" variants={fadeUpItem}>
-              4 years shipping software at CIBC. Now building AI products that work. MMAI at Schulich.
+              4+ years shipping software at CIBC. Now building AI products that work. MMAI at Schulich.
             </motion.p>
 
             <ul className="dash-list hero__bring">
