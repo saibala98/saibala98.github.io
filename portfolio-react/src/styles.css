@@ -198,6 +198,7 @@ html.custom-cursor-active * {
   letter-spacing: -1.4px;
   color: var(--ink);
   margin: 0;
+  text-shadow: 2px 2px 4px rgba(83, 58, 253, 0.3);
 }
 .section-title {
   font: 300 clamp(2rem, 3.5vw, 2.75rem) / 1.1 var(--font-body);
