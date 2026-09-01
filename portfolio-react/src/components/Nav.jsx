@@ -95,14 +95,6 @@ export default function Nav({ home = true }) {
 
         <ul className={`nav__links${isOpen ? ' is-open' : ''}`} id="navLinks" ref={navLinksRef}>
           <li>
-            {/* CUE's content now lives inside the Work section's accordion
-                (id="work"), not its own #cue anchor - retargeted here so
-                this link isn't dead, without otherwise touching nav structure. */}
-            <a href={linkHref('work')} data-nav={home || undefined} onClick={() => setIsOpen(false)}>
-              CUE
-            </a>
-          </li>
-          <li>
             <a href={linkHref('work')} data-nav={home || undefined} onClick={() => setIsOpen(false)}>
               Work
             </a>

@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import CaseStudy from './pages/CaseStudy.jsx';
+import CopilotCaseStudy from './pages/CopilotCaseStudy.jsx';
 import CustomCursor from './components/CustomCursor.jsx';
 
 // The /demo app under public/demo/app.html is a separately built React app
@@ -14,6 +15,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/case-study" element={<CaseStudy />} />
+        <Route path="/case-study-copilot" element={<CopilotCaseStudy />} />
       </Routes>
     </>
   );

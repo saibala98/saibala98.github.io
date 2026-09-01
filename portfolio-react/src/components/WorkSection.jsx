@@ -28,16 +28,6 @@ function ProgressGlyph({ filled, total = 10 }) {
   );
 }
 
-function ComingSoonButton({ variant, children }) {
-  return (
-    <span className="btn-tooltip-wrap" title="Coming soon">
-      <button type="button" className={`btn ${variant}`} disabled>
-        {children}
-      </button>
-    </span>
-  );
-}
-
 function CueWorkContent() {
   const viewportRef = useRef(null);
   const frameRef = useRef(null);
@@ -160,58 +150,105 @@ function CueWorkContent() {
   );
 }
 
+const COPILOT_DEMO_URL = 'https://www.saisaiprasad.com/Smart_Contribution_Copilot/';
+const COPILOT_GITHUB_URL = 'https://github.com/saibala98/Smart_Contribution_Copilot';
+
 function CopilotWorkContent() {
+  const viewportRef = useRef(null);
+  const frameRef = useRef(null);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const frame = frameRef.current;
+    if (!viewport || !frame) return undefined;
+
+    const resize = () => {
+      const scale = viewport.clientWidth / DEMO_DESIGN_WIDTH;
+      frame.style.setProperty('--demo-scale', scale.toFixed(4));
+    };
+    resize();
+
+    if (!('ResizeObserver' in window)) return undefined;
+    const observer = new ResizeObserver(resize);
+    observer.observe(viewport);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="copilot-grid">
-      <div>
-        <p className="heading-lg" style={{ fontWeight: 300 }}>
-          Banking customers consistently struggle to decide how much to contribute to registered savings
-          accounts - RRSP, TFSA, and FHSA - and when. The idea is simple: an AI-guided module embedded
-          within a banking app&apos;s financial planning experience that removes the guesswork.
-        </p>
-        <p className="cue-desc">
-          A concept for any banking application looking to deepen its financial planning capabilities. The
-          module analyzes a customer&apos;s income, goals, tax situation, and current savings to recommend
-          optimized contribution amounts across registered accounts, and explains the reasoning in plain
-          language.
-        </p>
-        <ul className="dash-list">
-          <li>Personalized RRSP/TFSA/FHSA contribution recommendations</li>
-          <li>Tax optimization logic (deduction limits vs. flexibility)</li>
-          <li>FHSA first-home buyer guidance and eligibility checks</li>
-          <li>Plain-language explanations for every recommendation</li>
-          <li>Interactive prototype for stakeholder demos</li>
-        </ul>
-        <div className="concept-note">
-          💡 Concept stage - the product thinking and UX flow are mapped out. Engineering implementation is
-          next.
+    <>
+      <div className="copilot-grid">
+        <div>
+          <p className="heading-lg" style={{ fontWeight: 300 }}>
+            Banking customers consistently struggle to decide how much to contribute to registered savings
+            accounts - RRSP, TFSA, and FHSA - and when. The idea is simple: an AI-guided module embedded
+            within a banking app&apos;s financial planning experience that removes the guesswork.
+          </p>
+          <p className="cue-desc">
+            A concept for any banking application looking to deepen its financial planning capabilities. The
+            module analyzes a customer&apos;s income, goals, tax situation, and current savings to recommend
+            optimized contribution amounts across registered accounts, and explains the reasoning in plain
+            language.
+          </p>
+          <ul className="dash-list">
+            <li>Personalized RRSP/TFSA/FHSA contribution recommendations</li>
+            <li>Tax optimization logic (deduction limits vs. flexibility)</li>
+            <li>FHSA first-home buyer guidance and eligibility checks</li>
+            <li>Plain-language explanations for every recommendation</li>
+            <li>Interactive prototype for stakeholder demos</li>
+          </ul>
+          <div className="concept-note">
+            💡 Concept stage - the product thinking and UX flow are mapped out. Engineering implementation is
+            next.
+          </div>
+        </div>
+
+        <div>
+          <div className="about-stats">
+            <div className="stat-card">
+              <div className="stat-card__value tnum">3</div>
+              <div className="stat-card__label">Registered accounts</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-card__value">💡</div>
+              <div className="stat-card__label">Concept stage</div>
+            </div>
+          </div>
+          <ul className="tag-list copilot-tags">
+            {['React', 'AI/ML', 'Banking', 'UX Research', 'Fintech'].map((tag) => (
+              <li className="tag tag-tech" key={tag}>
+                {tag}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      <div>
-        <div className="about-stats">
-          <div className="stat-card">
-            <div className="stat-card__value tnum">3</div>
-            <div className="stat-card__label">Registered accounts</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-card__value">💡</div>
-            <div className="stat-card__label">Concept stage</div>
-          </div>
+      <div className="cue-demo">
+        <div className="cue-demo-viewport" ref={viewportRef}>
+          <iframe
+            ref={frameRef}
+            className="cue-demo__frame"
+            src={COPILOT_DEMO_URL}
+            title="Live preview of the Smart Contribution Copilot demo"
+          ></iframe>
         </div>
-        <ul className="tag-list copilot-tags">
-          {['React', 'AI/ML', 'Banking', 'UX Research', 'Fintech'].map((tag) => (
-            <li className="tag tag-tech" key={tag}>
-              {tag}
-            </li>
-          ))}
-        </ul>
-        <div className="cue-actions">
-          <ComingSoonButton variant="btn-primary">View pitch deck</ComingSoonButton>
-          <ComingSoonButton variant="btn-secondary">Interactive prototype</ComingSoonButton>
-        </div>
+        <a className="cue-demo__badge" href={COPILOT_DEMO_URL} target="_blank" rel="noreferrer">
+          Try live demo &rarr;
+        </a>
       </div>
-    </div>
+
+      <div className="cue-actions">
+        <Link to="/case-study-copilot" className="btn btn-primary">
+          View full PRD &rarr;
+        </Link>
+        <a href={COPILOT_DEMO_URL} target="_blank" rel="noreferrer" className="btn btn-secondary">
+          Try live demo
+        </a>
+        <a href={COPILOT_GITHUB_URL} target="_blank" rel="noreferrer" className="btn btn-ghost">
+          GitHub
+        </a>
+      </div>
+    </>
   );
 }
 
@@ -260,7 +297,7 @@ export default function WorkSection() {
             subtitle="AI-guided registered savings optimization - banking feature concept"
             tags={['React', 'AI/ML', 'Banking', 'UX Research', 'Fintech']}
             year="2026"
-            status="In Progress"
+            statusBadges={[{ label: 'Built Demo', tone: 'complete' }]}
             isOpen={openItem === 'copilot'}
             onToggle={() => toggle('copilot')}
           >
